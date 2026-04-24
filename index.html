@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Harmati Magyarország — Közösségi média ügynökség</title>
+<meta name="description" content="Harmati Magyarország — mérhető eredményekre épített közösségi média stratégia, tartalom, hirdetés és weboldalkészítés magyar márkáknak." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="grain">
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="inner">
+    <a href="#" class="brand">
+      <span class="logo-circle logo-sm">
+        <img src="brand_assets/logo.png" alt="Harmati logó" />
+      </span>
+      <span class="brand-text">Harmati <em>Magyarország</em></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#szolgaltatasok">Szolgáltatások</a>
+      <a href="#weboldal">Weboldal</a>
+      <a href="#ai">MI-növekedés</a>
+      <a href="#megkozelites">Megközelítés</a>
+      <a href="#kapcsolat">Kapcsolat</a>
+    </nav>
+
+    <div class="nav-right">
+      <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" aria-label="TikTok" class="social-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
+      </a>
+      <a href="#kapcsolat" class="nav-cta">
+        Árajánlat
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO — WebGL Shader Background -->
+<section class="hero" id="hero">
+  <div class="paths-bg" aria-hidden="true">
+    <canvas id="shader-canvas"></canvas>
+  </div>
+  <div class="paths-veil"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-avail anim anim-d1">
+        <span class="ping-dot"></span>
+        <span>Új projekteket fogadunk — 2026 Q2</span>
+      </div>
+
+      <h1
+        id="hero-title"
+        class="hero-title"
+        data-text="A közösségi média művészete"
+        data-accent="művészete"
+      >A közösségi média művészete</h1>
+
+      <p class="hero-sub anim anim-d3">
+        A Harmati Magyarország egy független közösségi média műhely. Magyar márkáknak építünk stratégiát, tartalmat és hirdetési rendszert — mérhető eredményekre hangolva, feltűnés nélküli kézművességgel.
+      </p>
+
+      <div class="hero-ctas anim anim-d4">
+        <a href="#kapcsolat" class="liquid liquid-gold">
+          Indítsuk el a projektet
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#szolgaltatasok" class="liquid">Szolgáltatások</a>
+      </div>
+    </div>
+
+    <div class="hero-right anim anim-right anim-d3">
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="num">6</div>
+          <div class="lbl">kiemelt platform</div>
+        </div>
+        <div class="stat">
+          <div class="num">100%</div>
+          <div class="lbl">magyar csapat</div>
+        </div>
+        <div class="stat">
+          <div class="num">7 <span style="color:var(--gold)">nap</span></div>
+          <div class="lbl">indulási idő</div>
+        </div>
+        <div class="stat">
+          <div class="num">4 <span style="color:var(--gold)">hó</span></div>
+          <div class="lbl">minimum együttműködés</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-cue">
+    <span>görgess</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- PLATFORM MARQUEE -->
+<section class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-group">
+      <span class="marquee-item">Instagram</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">TikTok</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">LinkedIn</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">YouTube</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Facebook</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Meta&nbsp;Ads</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Google&nbsp;Ads</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Threads</span><span class="marquee-sep">◆</span>
+    </div>
+    <div class="marquee-group">
+      <span class="marquee-item">Instagram</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">TikTok</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">LinkedIn</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">YouTube</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Facebook</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Meta&nbsp;Ads</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Google&nbsp;Ads</span><span class="marquee-sep">◆</span>
+      <span class="marquee-item">Threads</span><span class="marquee-sep">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="szolgaltatasok" class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="left anim anim-left">
+        <div class="eyebrow">01 — Szolgáltatások</div>
+        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Hat terület, egy rendszer</div>
+      </div>
+      <div class="right anim anim-d2">
+        <h2>Nem kampányokat szállítunk. <em class="display-italic" style="color:var(--gold)">Rendszert építünk,</em> amely hónapokon át dolgozik a márkádért.</h2>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <article class="service anim anim-scale anim-d1">
+        <div class="service-header">
+          <span class="service-num">/01</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1"/>
+            <path d="M14 5v9l6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Stratégia</h3>
+        <p>Piackutatás, versenytárselemzés, célközönség-térkép és éves tartalmi irány. A stratégia nem dokumentum — iránytű, amit minden hét használ.</p>
+        <ul>
+          <li>— Márka audit & pozicionálás</li>
+          <li>— Tartalmi pillérek</li>
+          <li>— KPI keretrendszer</li>
+        </ul>
+      </article>
+
+      <article class="service anim anim-scale anim-d2">
+        <div class="service-header">
+          <span class="service-num">/02</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="4" y="6" width="20" height="14" rx="1.5" stroke="currentColor" stroke-width="1"/>
+            <path d="M4 10h20M9 14h6" stroke="currentColor" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3>Tartalomgyártás</h3>
+        <p>Forgatás, vágás, fotó, grafika és szövegírás. Saját stúdió Budapesten, mobilis forgatócsoport az ország bármely pontján.</p>
+        <ul>
+          <li>— Rövidvideó (Reels, TikTok)</li>
+          <li>— Statikus & carousel grafika</li>
+          <li>— Szövegírás, copy</li>
+        </ul>
+      </article>
+
+      <article class="service anim anim-scale anim-d3">
+        <div class="service-header">
+          <span class="service-num">/03</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M3 21 L10 13 L14 17 L22 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="7" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3>Hirdetéskezelés</h3>
+        <p>Meta, Google és TikTok hirdetési fiókok napi kezelése. Kreatív tesztelés, közönség-szegmentálás, ROAS-ra optimalizálva.</p>
+        <ul>
+          <li>— Meta Ads (Facebook, Instagram)</li>
+          <li>— Google Ads & YouTube</li>
+          <li>— TikTok Ads Manager</li>
+        </ul>
+      </article>
+
+      <article class="service anim anim-scale anim-d1">
+        <div class="service-header">
+          <span class="service-num">/04</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="10" cy="11" r="4" stroke="currentColor" stroke-width="1"/>
+            <circle cx="19" cy="15" r="3" stroke="currentColor" stroke-width="1"/>
+            <path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Közösségépítés</h3>
+        <p>Moderáció, DM-kezelés, közösségi válaszok magyarul, a márka hangján. Egy márkának emberi hang kell — nem botos válaszok.</p>
+        <ul>
+          <li>— Válaszkezelés 24 órán belül</li>
+          <li>— Krízis-protokoll</li>
+          <li>— Közösségi események</li>
+        </ul>
+      </article>
+
+      <article class="service anim anim-scale anim-d2">
+        <div class="service-header">
+          <span class="service-num">/05</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M5 22V10M12 22V4M19 22V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Analitika</h3>
+        <p>Heti dashboard, havi beszámolók és negyedéves retrospektív. Számok, kontextussal — nem képernyőfotók egy prezentációban.</p>
+        <ul>
+          <li>— Looker Studio dashboard</li>
+          <li>— GA4 & platform-analitika</li>
+          <li>— Hozzáférés a nyers adathoz</li>
+        </ul>
+      </article>
+
+      <article class="service anim anim-scale anim-d3">
+        <div class="service-header">
+          <span class="service-num">/06</span>
+          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 3 L17 11 L25 11 L19 16 L21 24 L14 19 L7 24 L9 16 L3 11 L11 11 Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Márkaépítés</h3>
+        <p>Vizuális identitás, hangnem-könyv, tipográfiai rendszer. Nemcsak logó — konzisztens nyelv, ami minden csatornán felismerhető.</p>
+        <ul>
+          <li>— Arculati kézikönyv</li>
+          <li>— Közösségi sablonrendszer</li>
+          <li>— Tone of voice dokumentum</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- WEBSITE CREATION -->
+<section id="weboldal" class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="left anim anim-left">
+        <div class="eyebrow">02 — Weboldalkészítés</div>
+        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Tervezés, fejlesztés, üzemeltetés</div>
+      </div>
+      <div class="right anim anim-d2">
+        <h2>A márkád <em class="display-italic" style="color:var(--gold)">az interneten</em> — nem csak a közösségi médián.</h2>
+      </div>
+    </div>
+
+    <div class="grid-12 anim anim-d1" style="align-items:center; gap:40px;">
+      <div style="grid-column: span 12;">
+        <p style="color:var(--mist);font-size:15.5px;line-height:1.8;max-width:720px;margin:0 0 40px">
+          A közösségi média hozza a figyelmet — a weboldalad váltja át vásárlássá, foglalássá, megkereséssé. Landing oldalaktól a komplett webshopokig saját csapattal dolgozunk: tervezés Figma-ban, fejlesztés modern keretrendszerben, és utána is mellettetek maradunk az üzemeltetésben.
+        </p>
+      </div>
+
+      <div style="grid-column: span 12;" class="anim anim-scale anim-d2">
+        <div class="browser-mock">
+          <div class="bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="url">harmatimagyarorszag.com/projekt</span>
+          </div>
+          <div class="content">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="blocks">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="web-grid" style="margin-top:48px;">
+      <div class="web-feature anim anim-scale anim-d1">
+        <div class="num">/ 01</div>
+        <h4>Landing oldalak</h4>
+        <p>Kampányhoz kötött, egy célra optimalizált oldalak. A/B teszteléssel, konverziómérővel, heti finomhangolással.</p>
+      </div>
+      <div class="web-feature anim anim-scale anim-d2">
+        <div class="num">/ 02</div>
+        <h4>Márkahonlapok</h4>
+        <p>Prezentációs oldalak, amelyek a márka nyelvén beszélnek. Egyedi tervezés, nem sablonból — Figma-ban kezdjük, kóddal zárjuk.</p>
+      </div>
+      <div class="web-feature anim anim-scale anim-d3">
+        <div class="num">/ 03</div>
+        <h4>Webshopok</h4>
+        <p>Shopify, WooCommerce vagy egyedi megoldás. Termékkatalógus, fizetés, készletkezelés, számlázás — egybekötve.</p>
+      </div>
+      <div class="web-feature anim anim-scale anim-d4">
+        <div class="num">/ 04</div>
+        <h4>Üzemeltetés</h4>
+        <p>Nem csak átadjuk és elköszönünk. Havi karbantartás, frissítések, biztonsági mentések, és 24 órán belüli hibajavítás.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI — 3D PHONE -->
+<section id="ai" class="section">
+  <span class="orb" style="width:380px;height:380px;top:40px;left:-120px;background:radial-gradient(circle, var(--gold) 0%, transparent 70%);"></span>
+  <span class="orb" style="width:260px;height:260px;bottom:40px;right:-80px;background:radial-gradient(circle, var(--dew) 0%, transparent 70%); animation-delay: -7s;"></span>
+
+  <div class="container" style="position:relative;">
+    <div class="section-head">
+      <div class="left anim anim-left">
+        <div class="eyebrow">03 — MI-vezérelt növekedés</div>
+        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">2026. évi eszközpark</div>
+      </div>
+      <div class="right anim anim-d2">
+        <h2>A legújabb AI modellekkel dolgozunk — <em class="display-italic" style="color:var(--gold)">a maximális növekedésért.</em></h2>
+      </div>
+    </div>
+
+    <div class="ai-grid">
+      <div class="ai-features">
+        <div class="ai-feature anim anim-left anim-d1">
+          <div class="diamond">◆</div>
+          <div>
+            <h3>Generatív kreatív</h3>
+            <p>A vizuális koncepciók és változatok Claude, GPT és Midjourney modellekkel készülnek — húszszoros sebesség, ember által gondozott minőség.</p>
+          </div>
+        </div>
+        <div class="ai-feature anim anim-left anim-d2">
+          <div class="diamond">◆</div>
+          <div>
+            <h3>Prediktív hirdetés-optimalizáció</h3>
+            <p>A platformok natív AI-ja mellett saját előrejelző modelljeink is futnak. A kreatív-kimerülést órákkal előre látjuk, nem napokkal utólag.</p>
+          </div>
+        </div>
+        <div class="ai-feature anim anim-left anim-d3">
+          <div class="diamond">◆</div>
+          <div>
+            <h3>Tartalom-asszisztensek</h3>
+            <p>Egyedi promptrendszerek márkánként: a hangnem, a szókincs és a tabuk mind dokumentáltan benne vannak a modellekben.</p>
+          </div>
+        </div>
+        <div class="ai-feature anim anim-left anim-d4">
+          <div class="diamond">◆</div>
+          <div>
+            <h3>Adat-intelligencia</h3>
+            <p>Heti AI-elemzés a teljesítményről: mi mozog, miért, és mi a következő három kísérlet. Emberi stratégiai döntés, MI-alapú előkészítéssel.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="anim anim-right anim-d2">
+        <div class="phone-stage">
+          <span class="phone-label tl">model :: live</span>
+          <span class="phone-label br">harmati.mi · 2026</span>
+          <canvas id="phone-canvas" class="phone-canvas" aria-label="Forgatható 3D telefon"></canvas>
+          <span class="phone-hint">⟲ fogd meg és forgasd</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="folyamat" class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="left anim anim-left">
+        <div class="eyebrow">04 — Munkafolyamat</div>
+        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Négy szakasz, egy ritmus</div>
+      </div>
+      <div class="right anim anim-d2">
+        <h2>Minden együttműködés ugyanígy indul — <em class="display-italic" style="color:var(--gold)">de sosem ugyanott végződik.</em></h2>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step active anim anim-d1">
+        <span class="dot"></span>
+        <div class="when">01 — Hét 1</div>
+        <h3>Felfedezés</h3>
+        <p>Mélyinterjú a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás. Megértjük, hol tart most a márka.</p>
+      </div>
+
+      <div class="process-step anim anim-d2">
+        <span class="dot"></span>
+        <div class="when">02 — Hét 2–3</div>
+        <h3>Stratégia</h3>
+        <p>Pozicionálás, közönség, tartalmi pillérek, csatorna-súlyozás és hirdetési keret. Írásos dokumentum, prezentáció és egyoldalas iránytű.</p>
+      </div>
+
+      <div class="process-step anim anim-d3">
+        <span class="dot"></span>
+        <div class="when">03 — Hónap 2+</div>
+        <h3>Kivitelezés</h3>
+        <p>Havi tartalmi naptár, heti forgatás, napi közzététel és moderáció. Hirdetések futnak, kreatívok tesztelődnek. Minden a helyén.</p>
+      </div>
+
+      <div class="process-step anim anim-d4">
+        <span class="dot"></span>
+        <div class="when">04 — Negyedévenként</div>
+        <h3>Optimalizáció</h3>
+        <p>Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus. A második negyedév soha nem olyan, mint az első.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH / 05 — REWORKED -->
+<section id="megkozelites" class="section">
+  <div class="container">
+    <div class="eyebrow anim anim-left" style="margin-bottom:24px;">05 — Megközelítés</div>
+
+    <div class="approach-intro">
+      <div class="anim anim-left anim-d1">
+        <h2>
+          A figyelem nem kampány.<br>
+          <em class="display-italic" style="color:var(--gold)">Naponta épül —</em><br>
+          vagy naponta&nbsp;ér véget.
+        </h2>
+      </div>
+
+      <div class="approach-body anim anim-right anim-d2">
+        <p>
+          A közösségi média <strong>nem reklámcsatorna</strong>, hanem a márkád mindennapi viselkedése a nyilvánosság előtt. Hogyan szólal meg, mire reagál, mit ismer el, és mikor marad csendben — ezek a kérdések minden nap újra eldőlnek. Egy kampánnyal nem lehet őket lezárni.
+        </p>
+        <p>
+          A Harmati Magyarország feladata, hogy ez a viselkedés <strong>következetes, hiteles és mérhető</strong> maradjon. Nincsenek csodareceptek, és nincs olyan <em>„titkos fogás"</em>, amit egy jó agenciától meg lehetne venni. Helyette van iparos figyelem, heti ritmus és átláthatóan vezetett számok.
+        </p>
+        <p>
+          Nem vállalunk egyszerre nyolcnál több aktív márkát. Nem dolgozunk automatizált MI-posztokkal, amelyek mögött nincs emberi szerkesztés. És nem vesszük fel azt a projektet, amelyben mi magunk sem hiszünk — mert a közönség fél éven belül észreveszi.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pull quote / manifesto -->
+    <div class="pull-quote anim anim-scale anim-d1">
+      <blockquote>
+        A márka nem abból él, amit egyszer mondott magáról. Abból, amit minden nap megismétel —&nbsp;szóval, képpel, válaszadással, vagy épp a csenddel.
+      </blockquote>
+      <cite>— Harmati műhely, 2026</cite>
+    </div>
+
+    <!-- PRINCIPLES (6) -->
+    <div class="principles">
+      <div class="principle anim anim-scale anim-d1">
+        <div class="roman">i.</div>
+        <h4>Átlátható beszámolók</h4>
+        <p>A nyers adat a tiéd. Minden kampány, minden hirdetési forint nyomon követhető.</p>
+      </div>
+      <div class="principle anim anim-scale anim-d2">
+        <div class="roman">ii.</div>
+        <h4>Magyar piac, magyar nyelv</h4>
+        <p>A stratégia és a szöveg Magyarországon készül. Kulturális kontextus nélkül nincs jó kommunikáció.</p>
+      </div>
+      <div class="principle anim anim-scale anim-d3">
+        <div class="roman">iii.</div>
+        <h4>Havi ritmus, nem sprint</h4>
+        <p>Minimum négy hónapos együttműködésben dolgozunk. Rövidebb idő alatt nem mérhető, mi számít.</p>
+      </div>
+      <div class="principle anim anim-scale anim-d1">
+        <div class="roman">iv.</div>
+        <h4>Egy kapcsolattartó</h4>
+        <p>Egy dedikált stratéga kíséri végig a projektet. Nincsenek átadások, nincsenek elveszett e-mailek.</p>
+      </div>
+      <div class="principle anim anim-scale anim-d2">
+        <div class="roman">v.</div>
+        <h4>Kis portfólió, mély figyelem</h4>
+        <p>Egyszerre legfeljebb nyolc aktív márkát kísérünk. Inkább mondunk nemet, mint hogy felületesek legyünk.</p>
+      </div>
+      <div class="principle anim anim-scale anim-d3">
+        <div class="roman">vi.</div>
+        <h4>Tulajdonosi hozzáférés</h4>
+        <p>Minden fiók, domain és adat a tiéd marad. Ha egyszer külön utakra térünk, semmit nem kell visszakérned.</p>
+      </div>
+    </div>
+
+    <!-- COMMITMENTS -->
+    <div class="commitments">
+      <h3 class="commitments-head anim anim-left anim-d1">
+        Amit <em class="display-italic" style="color:var(--gold)">garantálunk</em>, és amit sosem fogunk megígérni.
+      </h3>
+
+      <div class="commitments-list">
+        <div class="commit-row anim anim-d1">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>Minden hónap elején</strong> közös stratégiai megbeszélés videón. Jelen van a stratéga és a kampánymenedzser is.</div>
+        </div>
+
+        <div class="commit-row anim anim-d2">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>Tartalmi naptár előre két héttel.</strong> Minden posztot, videót és hirdetést látsz, mielőtt megjelenne.</div>
+        </div>
+
+        <div class="commit-row anim anim-d1">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>Válasz 24 órán belül</strong> minden e-mailre és üzenetre, munkanapokon. Nem csak a stratégiai kérdésekre — a kicsikre is.</div>
+        </div>
+
+        <div class="commit-row anim anim-d2">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>Nem ígérünk konkrét követőszámot.</strong> Aki garantál, nem ért hozzá, vagy botokat vesz. Mi mérhető üzleti eredményekért dolgozunk.</div>
+        </div>
+
+        <div class="commit-row anim anim-d1">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>Soha nem teszünk közzé tartalmat jóváhagyás nélkül.</strong> Az első három hónapban minden posztot látsz előtte; utána a ritmus bizalmon alapul.</div>
+        </div>
+
+        <div class="commit-row anim anim-d2">
+          <div class="check">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="text"><strong>30 napos felmondás, bármikor.</strong> Ha nem működik az együttműködés, nem kötünk béklyóba. Hosszú szerződésekhez nincs érvényes érvünk.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="kapcsolat" class="section" style="overflow:hidden;">
+  <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:60rem;height:60rem;border-radius:999px;pointer-events:none;background:radial-gradient(circle, rgba(201,164,107,0.13) 0%, rgba(201,164,107,0) 55%);"></div>
+
+  <div class="container" style="position:relative;">
+    <div class="contact-grid">
+      <div class="contact-left anim anim-left anim-d1">
+        <div class="eyebrow">06 — Kapcsolat</div>
+        <h2>Írj nekünk. <em class="display-italic" style="color:var(--gold)">Egy héten belül</em> leülünk beszélgetni.</h2>
+
+        <div class="contact-lines">
+          <button type="button" class="contact-line" data-copy="andor@harmatimagyarorszag.com" data-copy-label="E-mail másolva">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4.5 L8 9 L14 4.5 M2 4.5 V11.5 A1 1 0 0 0 3 12.5 H13 A1 1 0 0 0 14 11.5 V4.5 A1 1 0 0 0 13 3.5 H3 A1 1 0 0 0 2 4.5 Z" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>andor@harmatimagyarorszag.com</span>
+            <span class="copy-hint">— másolás</span>
+          </button>
+
+          <button type="button" class="contact-line" data-copy="+36 30 688 6036" data-copy-label="Telefonszám másolva">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3 L5 3 L6.5 6 L5 7 C5 9 7 11 9 11 L10 9.5 L13 11 V13 C13 13.5 12.5 14 12 14 C7 14 2 9 2 4 C2 3.5 2.5 3 3 3 Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            <span>+36 30 688 6036</span>
+            <span class="copy-hint">— másolás</span>
+          </button>
+
+          <div class="contact-socials">
+            <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
+            </a>
+            <span class="handle">@harmatimagyarorszag</span>
+          </div>
+        </div>
+
+        <div class="contact-capacity">
+          <div class="rule-label" style="margin-bottom:24px;justify-content:flex-start;">
+            <span>Jelenlegi kapacitás</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+            <span class="ping-dot"></span>
+            <span style="font-size:14px;color:var(--ivory);">2026 Q2 — 2 új ügyfelet fogadunk</span>
+          </div>
+          <div class="font-mono" style="font-size:12px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;">Átlagos ügyfél-együttműködés: 2,7 év</div>
+        </div>
+      </div>
+
+      <div class="anim anim-right anim-d2">
+        <form class="contact-form" id="contact-form" action="mailto:andor@harmatimagyarorszag.com" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="field">
+              <label>Név</label>
+              <input name="Név" type="text" required />
+            </div>
+            <div class="field">
+              <label>Cégnév</label>
+              <input name="Cégnév" type="text" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input name="Email" type="email" required />
+          </div>
+
+          <div class="field">
+            <div class="lbl">Érdekelt szolgáltatás</div>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="Stratégia" value="igen" /> Stratégia</label>
+              <label class="chip"><input type="checkbox" name="Tartalom" value="igen" /> Tartalom</label>
+              <label class="chip"><input type="checkbox" name="Hirdetés" value="igen" /> Hirdetés</label>
+              <label class="chip"><input type="checkbox" name="Közösség" value="igen" /> Közösség</label>
+              <label class="chip"><input type="checkbox" name="Márkaépítés" value="igen" /> Márkaépítés</label>
+              <label class="chip"><input type="checkbox" name="Weboldal" value="igen" /> Weboldal</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Röviden a projektről</label>
+            <textarea name="Üzenet" rows="4"></textarea>
+          </div>
+
+          <div class="form-footer">
+            <p>A beküldéssel elfogadod az adatvédelmi nyilatkozatot. Egy héten belül válaszolunk.</p>
+            <button type="submit" class="liquid liquid-gold">
+              Küldés
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="anim anim-d1">
+      <div class="brand">
+        <span class="logo-circle logo-xs">
+          <img src="brand_assets/logo.png" alt="Harmati logó" />
+        </span>
+        <span class="brand-text" style="font-size:20px;">Harmati <em>Magyarország</em></span>
+      </div>
+      <p class="footer-desc">
+        Független közösségi média műhely. Magyar márkáknak, hosszú távú figyelemre hangolva.
+      </p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-cols anim anim-d2">
+      <div class="footer-col">
+        <h6>Cég</h6>
+        <ul>
+          <li><a href="#megkozelites">Megközelítés</a></li>
+          <li><a href="#folyamat">Munkafolyamat</a></li>
+          <li><a href="#kapcsolat">Kapcsolat</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Szolgáltatás</h6>
+        <ul>
+          <li><a href="#szolgaltatasok">Stratégia</a></li>
+          <li><a href="#szolgaltatasok">Tartalom</a></li>
+          <li><a href="#szolgaltatasok">Hirdetés</a></li>
+          <li><a href="#weboldal">Weboldal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Jogi</h6>
+        <ul>
+          <li><a href="#">Adatvédelem</a></li>
+          <li><a href="#">ÁSZF</a></li>
+          <li><a href="#">Impresszum</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 Harmati Magyarország Kft. — Minden jog fenntartva.</div>
+    <div class="right">
+      <span style="display:inline-flex;align-items:center;gap:8px;"><span class="ping-dot"></span> Új projektekre nyitva</span>
+      <span>Europe/Budapest · v2026.04</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast -->
+<div id="toast" class="toast">Másolva</div>
+
+<!-- Three.js via importmap for the 3D phone -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module" src="scripts.js"></script>
+
+</body>
+</html>
