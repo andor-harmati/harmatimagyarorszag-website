@@ -108,7 +108,7 @@ function HeroScrub({
 
   // ── Scroll choreography ────────────────────────────────────────
   React.useEffect(() => {
-    if (reduced || !ready || !framesOk) return;
+    if (reduced) return;
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
     if (!gsap || !ScrollTrigger) {
@@ -118,7 +118,7 @@ function HeroScrub({
     const section = sectionRef.current;
     if (!section) return;
 
-    console.log('[HeroScrub] registering ScrollTrigger timeline');
+    console.log('[HeroScrub] registering ScrollTrigger timeline (framesOk=' + framesOk + ', ready=' + ready + ')');
 
     const startScale  = () => window.innerWidth < 768 ? CARD_START_SCALE_MOBILE : CARD_START_SCALE_DESKTOP;
     const immerseScale = () => {
@@ -239,12 +239,14 @@ function HeroScrub({
               aspectRatio: aspect,
             }}
           >
+            {/* Fallback gradient behind the canvas */}
+            <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 30%, rgba(58,140,99,0.35), transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(45,106,79,0.45), transparent 60%), linear-gradient(180deg, #0f1c14 0%, #0a120e 100%)' }} />
             <div aria-hidden="true" style={{ pointerEvents: 'none', position: 'absolute', inset: 0, zIndex: 20, boxShadow: 'inset 0 0 120px rgba(0,0,0,0.45)' }} />
             {framesOk && (
               <canvas
                 ref={canvasRef}
                 aria-hidden="true"
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', zIndex: 1 }}
               />
             )}
           </div>
