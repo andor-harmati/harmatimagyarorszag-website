@@ -1,5 +1,4 @@
-// HeroScrub.jsx — adapted from hero-scrub.tsx
-// Converted: TypeScript → JS, Tailwind → inline styles, Next.js → plain React
+// HeroScrub.jsx — Harmati Magyarország (rewritten for reliability)
 // GSAP + ScrollTrigger must be loaded as globals before this file.
 
 const PIN_VH_MULTIPLE = 3.2;
@@ -99,89 +98,98 @@ function HeroScrub({
   // ── Entry animation ────────────────────────────────────────────
   React.useEffect(() => {
     if (reduced || !window.gsap) return;
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: ENTRY_DELAY });
-      tl.from(bgRef.current,       { opacity: 0, duration: 1.4, ease: "power2.out" });
-      tl.from(cardRef.current,     { opacity: 0, duration: 1.1, ease: "power3.out" }, 0.35);
-      tl.from(titleTopRef.current, { opacity: 0, y: 30, duration: 1, ease: "expo.out" }, 0.5);
-      tl.from(titleBotRef.current, { opacity: 0, y: -30, duration: 1, ease: "expo.out" }, 0.62);
-    }, sectionRef);
-    return () => ctx.revert();
+    const tl = gsap.timeline({ delay: ENTRY_DELAY });
+    if (bgRef.current)       tl.from(bgRef.current,       { opacity: 0, duration: 1.4, ease: "power2.out" });
+    if (cardRef.current)     tl.from(cardRef.current,     { opacity: 0, duration: 1.1, ease: "power3.out" }, 0.35);
+    if (titleTopRef.current) tl.from(titleTopRef.current, { opacity: 0, y: 30, duration: 1, ease: "expo.out" }, 0.5);
+    if (titleBotRef.current) tl.from(titleBotRef.current, { opacity: 0, y: -30, duration: 1, ease: "expo.out" }, 0.62);
+    return () => tl.kill();
   }, [reduced]);
 
   // ── Scroll choreography ────────────────────────────────────────
   React.useEffect(() => {
-    if (reduced || !ready || !framesOk || !window.gsap) return;
+    if (reduced || !ready || !framesOk) return;
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    if (!gsap || !ScrollTrigger) {
+      console.warn('[HeroScrub] gsap or ScrollTrigger missing', { gsap: !!gsap, ScrollTrigger: !!ScrollTrigger });
+      return;
+    }
     const section = sectionRef.current;
     if (!section) return;
 
-    const ctx = gsap.context(() => {
-      const startScale  = () => window.innerWidth < 768 ? CARD_START_SCALE_MOBILE : CARD_START_SCALE_DESKTOP;
-      const immerseScale = () => {
-        const vw = window.innerWidth, vh = window.innerHeight;
-        const baseW = Math.min(vw * 0.96, vh * 0.72 * aspect);
-        const baseH = Math.min(vh * 0.72, (vw * 0.96) / aspect);
-        if (baseW <= 0 || baseH <= 0) return 1.5;
-        return Math.max(vw / baseW, vh / baseH) * IMMERSE_OVERFILL;
-      };
+    console.log('[HeroScrub] registering ScrollTrigger timeline');
 
-      const isLoaded = (i) => { const img = imagesRef.current[i]; return !!img && img.complete && img.naturalWidth > 0; };
+    const startScale  = () => window.innerWidth < 768 ? CARD_START_SCALE_MOBILE : CARD_START_SCALE_DESKTOP;
+    const immerseScale = () => {
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const baseW = Math.min(vw * 0.96, vh * 0.72 * aspect);
+      const baseH = Math.min(vh * 0.72, (vw * 0.96) / aspect);
+      if (baseW <= 0 || baseH <= 0) return 1.5;
+      return Math.max(vw / baseW, vh / baseH) * IMMERSE_OVERFILL;
+    };
 
-      const drawFrame = (index) => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
-        let useIdx = index;
-        if (!isLoaded(useIdx)) {
-          let found = -1;
-          for (let d = 1; d < frameCount; d++) {
-            if (useIdx - d >= 0 && isLoaded(useIdx - d)) { found = useIdx - d; break; }
-            if (useIdx + d < frameCount && isLoaded(useIdx + d)) { found = useIdx + d; break; }
-          }
-          if (found === -1) return;
-          useIdx = found;
+    const isLoaded = (i) => { const img = imagesRef.current[i]; return !!img && img.complete && img.naturalWidth > 0; };
+
+    const drawFrame = (index) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      let useIdx = index;
+      if (!isLoaded(useIdx)) {
+        let found = -1;
+        for (let d = 1; d < frameCount; d++) {
+          if (useIdx - d >= 0 && isLoaded(useIdx - d)) { found = useIdx - d; break; }
+          if (useIdx + d < frameCount && isLoaded(useIdx + d)) { found = useIdx + d; break; }
         }
-        if (lastDrawnRef.current === useIdx) return;
-        const img = imagesRef.current[useIdx];
-        const ctx2 = canvas.getContext("2d");
-        if (!ctx2 || !img) return;
-        ctx2.drawImage(img, 0, 0, canvas.width, canvas.height);
-        lastDrawnRef.current = useIdx;
-      };
+        if (found === -1) return;
+        useIdx = found;
+      }
+      if (lastDrawnRef.current === useIdx) return;
+      const img = imagesRef.current[useIdx];
+      const ctx2 = canvas.getContext("2d");
+      if (!ctx2 || !img) return;
+      ctx2.drawImage(img, 0, 0, canvas.width, canvas.height);
+      lastDrawnRef.current = useIdx;
+    };
 
-      gsap.set(cardRef.current, { scale: startScale(), transformOrigin: "50% 50%" });
+    if (cardRef.current) gsap.set(cardRef.current, { scale: startScale(), transformOrigin: "50% 50%" });
 
-      const master = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.4,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const p = self.progress;
-            const mapped = gsap.utils.clamp(0, 1, (p - 0.15) / 0.63);
-            const frameIdx = Math.min(frameCount - 1, Math.floor(mapped * frameCount));
-            drawFrame(frameIdx);
-          },
+    const master = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.4,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+          const mapped = gsap.utils.clamp(0, 1, (p - 0.15) / 0.63);
+          const frameIdx = Math.min(frameCount - 1, Math.floor(mapped * frameCount));
+          drawFrame(frameIdx);
         },
-      });
+      },
+    });
 
-      master.to(cardRef.current,     { scale: 1, ease: "power2.out", duration: 0.15 }, 0);
-      master.to(titleTopRef.current, { x: () => window.innerWidth < 768 ? "-70vw" : "-60vw", letterSpacing: "0.02em", ease: "power2.inOut", duration: 0.15 }, 0);
-      master.to(titleBotRef.current, { x: () => window.innerWidth < 768 ? "70vw"  : "60vw",  letterSpacing: "0.02em", ease: "power2.inOut", duration: 0.15 }, 0);
+    master.to(cardRef.current,     { scale: 1, ease: "power2.out", duration: 0.15 }, 0);
+    master.to(titleTopRef.current, { x: () => window.innerWidth < 768 ? "-70vw" : "-60vw", letterSpacing: "0.02em", ease: "power2.inOut", duration: 0.15 }, 0);
+    master.to(titleBotRef.current, { x: () => window.innerWidth < 768 ? "70vw"  : "60vw",  letterSpacing: "0.02em", ease: "power2.inOut", duration: 0.15 }, 0);
 
-      master.to(cardRef.current,     { scale: immerseScale(), ease: "power2.in", duration: 0.63 }, 0.15);
-      master.to(titleTopRef.current, { opacity: 0, ease: "power1.in", duration: 0.22 }, 0.15);
-      master.to(titleBotRef.current, { opacity: 0, ease: "power1.in", duration: 0.22 }, 0.15);
+    master.to(cardRef.current,     { scale: immerseScale(), ease: "power2.in", duration: 0.63 }, 0.15);
+    master.to(titleTopRef.current, { opacity: 0, ease: "power1.in", duration: 0.22 }, 0.15);
+    master.to(titleBotRef.current, { opacity: 0, ease: "power1.in", duration: 0.22 }, 0.15);
 
-      master.to(cardRef.current,     { scale: startScale(), ease: "power3.inOut", duration: 0.22 }, 0.78);
-      master.to(titleTopRef.current, { x: 0, opacity: 1, letterSpacing: "-0.04em", ease: "power2.inOut", duration: 0.22 }, 0.78);
-      master.to(titleBotRef.current, { x: 0, opacity: 1, letterSpacing: "-0.04em", ease: "power2.inOut", duration: 0.22 }, 0.78);
+    master.to(cardRef.current,     { scale: startScale(), ease: "power3.inOut", duration: 0.22 }, 0.78);
+    master.to(titleTopRef.current, { x: 0, opacity: 1, letterSpacing: "-0.04em", ease: "power2.inOut", duration: 0.22 }, 0.78);
+    master.to(titleBotRef.current, { x: 0, opacity: 1, letterSpacing: "-0.04em", ease: "power2.inOut", duration: 0.22 }, 0.78);
 
-      ScrollTrigger.refresh();
-    }, sectionRef);
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+    const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 600);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(refreshTimer);
+      master.scrollTrigger?.kill();
+      master.kill();
+    };
   }, [ready, framesOk, reduced, aspect, frameCount]);
 
   const tallHeight = `${(PIN_VH_MULTIPLE + 1) * 100}vh`;
@@ -192,19 +200,15 @@ function HeroScrub({
       aria-label="Cinematic scroll hero"
       style={{ position: 'relative', width: '100%', overflow: 'clip', color: '#fff', backgroundColor: bgColor, height: tallHeight }}
     >
-      {/* Sticky viewport */}
       <div ref={stickyRef} style={{ position: 'sticky', top: 0, display: 'flex', height: '100svh', width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
 
-        {/* Background layers */}
         <div ref={bgRef} aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, backgroundColor: accentHex }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'rgba(0,0,0,0.35)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'radial-gradient(ellipse at 50% 35%, rgba(255,255,255,0.06) 0%, transparent 55%)' }} />
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.6) 100%)' }} />
 
-        {/* Content */}
         <div style={{ position: 'relative', zIndex: 10, display: 'flex', height: '100%', width: '100%', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
 
-          {/* Title top */}
           <h2
             ref={titleTopRef}
             aria-hidden="true"
@@ -221,7 +225,6 @@ function HeroScrub({
             }}
           >{titleTop}</h2>
 
-          {/* Card / canvas */}
           <div
             ref={cardRef}
             style={{
@@ -246,7 +249,6 @@ function HeroScrub({
             )}
           </div>
 
-          {/* Title bottom */}
           <h2
             ref={titleBotRef}
             aria-hidden="true"
