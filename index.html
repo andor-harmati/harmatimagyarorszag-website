@@ -3,715 +3,566 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Harmati Magyarország — Közösségi média ügynökség</title>
-<meta name="description" content="Harmati Magyarország — mérhető eredményekre épített közösségi média stratégia, tartalom, hirdetés és weboldalkészítés magyar márkáknak." />
-
+<title>Harmati Magyarország — A közösségi média művészete</title>
+<link rel="icon" type="image/png" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>gsap.registerPlugin(ScrollTrigger);</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  html, body { background: #0b120e; color: #f2ede2; overflow-x: hidden; }
+  body {
+    font-family: 'Geist', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01","cv11";
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
 
-<link rel="stylesheet" href="styles.css" />
+  /* Grain */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+    opacity: 0.07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Marquee */
+  .marquee-section {
+    position: relative; border-top: 1px solid #1f2e25; border-bottom: 1px solid #1f2e25;
+    padding: 28px 0; overflow: hidden; background: #0b120e;
+  }
+  .marquee-section::before, .marquee-section::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 128px; z-index: 10; pointer-events: none;
+  }
+  .marquee-section::before { left: 0; background: linear-gradient(to right, #0b120e, transparent); }
+  .marquee-section::after  { right: 0; background: linear-gradient(to left, #0b120e, transparent); }
+  .marquee-track { display: flex; gap: 64px; width: max-content; animation: marquee 40s linear infinite; }
+  .marquee-group { display: flex; align-items: center; gap: 64px; }
+  .marquee-item { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 28px; color: rgba(242,237,226,0.82); white-space: nowrap; }
+  .marquee-sep  { color: rgba(58,140,99,0.7); }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Process timeline */
+  .process-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 32px;
+    position: relative; padding-top: 56px;
+  }
+  .process-grid::before {
+    content: ""; position: absolute; top: 12px; left: 0; right: 0;
+    height: 1px; background: #1f2e25;
+  }
+  .process-step .dot {
+    position: absolute; top: 0; left: 0;
+    width: 12px; height: 12px; border-radius: 999px;
+    background: #f2ede2; box-shadow: 0 0 0 4px #0b120e, 0 0 0 5px #1f2e25;
+  }
+  .process-step.active .dot {
+    background: #3a8c63;
+    box-shadow: 0 0 0 4px #0b120e, 0 0 0 5px #3a8c63, 0 0 18px rgba(58,140,99,0.6);
+  }
+
+  /* Principles grid */
+  .principles { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: #1f2e25; }
+  .principle { padding: 36px; background: #0b120e; transition: background 400ms; }
+  .principle:hover { background: #0a0c11; }
+
+  /* Contact form */
+  .field label {
+    display: block; font-family: 'Geist Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #7a8a7e; margin-bottom: 8px;
+  }
+  .field input, .field textarea {
+    width: 100%; background: transparent; border: 0;
+    border-bottom: 1px solid #2a3d30; padding: 8px 0;
+    color: #f2ede2; font-size: 15px; font-family: 'Geist', sans-serif;
+    transition: border-color 300ms;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-bottom-color: #3a8c63; }
+  .field textarea { resize: vertical; min-height: 96px; }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 999px; border: 1px solid #2a3d30;
+    font-size: 12.5px; font-family: 'Geist', sans-serif; color: #c8c5bd;
+    cursor: pointer; transition: border-color 300ms, color 300ms; user-select: none;
+  }
+  .chip:hover, .chip.active { border-color: #3a8c63; color: #3a8c63; }
+</style>
 </head>
+<body>
 
-<body class="grain">
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="HeroScrub.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Services.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="inner">
-    <a href="#" class="brand">
-      <span class="logo-circle logo-sm">
-        <img src="brand_assets/logo.png" alt="Harmati logó" />
-      </span>
-      <span class="brand-text">Harmati <em>Magyarország</em></span>
-    </a>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
 
-    <nav class="nav-links">
-      <a href="#szolgaltatasok">Szolgáltatások</a>
-      <a href="#weboldal">Weboldal</a>
-      <a href="#ai">MI-növekedés</a>
-      <a href="#megkozelites">Megközelítés</a>
-      <a href="#kapcsolat">Kapcsolat</a>
-    </nav>
+/* ── AI Section ── */
+const AISection = () => {
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    const tryInit = () => {
+      if (canvasRef.current && window.__initPhone3D) {
+        window.__initPhone3D(canvasRef.current);
+      } else {
+        setTimeout(tryInit, 100);
+      }
+    };
+    tryInit();
+  }, []);
 
-    <div class="nav-right">
-      <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" aria-label="TikTok" class="social-btn">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
-      </a>
-      <a href="#kapcsolat" class="nav-cta">
-        Árajánlat
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-      </a>
-    </div>
-  </div>
-</header>
+  const features = [
+    { title: 'Generatív kreatív', p: 'A vizuális koncepciók és változatok Claude, GPT és Midjourney modellekkel készülnek — húszszoros sebesség, ember által gondozott minőség.' },
+    { title: 'Prediktív hirdetés-optimalizáció', p: 'A platformok natív AI-ja mellett saját előrejelző modelljeink is futnak. A kreatív-kimerülést órákkal előre látjuk, nem napokkal utólag.' },
+    { title: 'Tartalom-asszisztensek', p: 'Egyedi promptrendszerek márkánként: a hangnem, a szókincs és a tabuk mind dokumentáltan benne vannak a modellekben.' },
+    { title: 'Adat-intelligencia', p: 'Heti AI-elemzés a teljesítményről: mi mozog, miért, és mi a következő három kísérlet. Emberi stratégiai döntés, MI-alapú előkészítéssel.' },
+  ];
 
-<!-- HERO — WebGL Shader Background -->
-<section class="hero" id="hero">
-  <div class="paths-bg" aria-hidden="true">
-    <canvas id="shader-canvas"></canvas>
-  </div>
-  <div class="paths-veil"></div>
+  return (
+    <section id="ai" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
+      <span style={{ position: 'absolute', width: 380, height: 380, top: 40, left: -120, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(58,140,99,0.28)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite' }} />
+      <span style={{ position: 'absolute', width: 260, height: 260, bottom: 40, right: -80, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(45,106,79,0.22)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite', animationDelay: '-7s' }} />
+      <style>{`@keyframes floaty{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(180deg)}}`}</style>
 
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-avail anim anim-d1">
-        <span class="ping-dot"></span>
-        <span>Új projekteket fogadunk — 2026 Q2</span>
-      </div>
-
-      <h1
-        id="hero-title"
-        class="hero-title"
-        data-text="A közösségi média művészete"
-        data-accent="művészete"
-      >A közösségi média művészete</h1>
-
-      <p class="hero-sub anim anim-d3">
-        A Harmati Magyarország egy független közösségi média műhely. Magyar márkáknak építünk stratégiát, tartalmat és hirdetési rendszert — mérhető eredményekre hangolva, feltűnés nélküli kézművességgel.
-      </p>
-
-      <div class="hero-ctas anim anim-d4">
-        <a href="#kapcsolat" class="liquid liquid-gold">
-          Indítsuk el a projektet
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-        </a>
-        <a href="#szolgaltatasok" class="liquid">Szolgáltatások</a>
-      </div>
-    </div>
-
-    <div class="hero-right anim anim-right anim-d3">
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="num">6</div>
-          <div class="lbl">kiemelt platform</div>
-        </div>
-        <div class="stat">
-          <div class="num">100%</div>
-          <div class="lbl">magyar csapat</div>
-        </div>
-        <div class="stat">
-          <div class="num">7 <span style="color:var(--gold)">nap</span></div>
-          <div class="lbl">indulási idő</div>
-        </div>
-        <div class="stat">
-          <div class="num">4 <span style="color:var(--gold)">hó</span></div>
-          <div class="lbl">minimum együttműködés</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll-cue">
-    <span>görgess</span>
-    <span class="line"></span>
-  </div>
-</section>
-
-<!-- PLATFORM MARQUEE -->
-<section class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <div class="marquee-group">
-      <span class="marquee-item">Instagram</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">TikTok</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">LinkedIn</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">YouTube</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Facebook</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Meta&nbsp;Ads</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Google&nbsp;Ads</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Threads</span><span class="marquee-sep">◆</span>
-    </div>
-    <div class="marquee-group">
-      <span class="marquee-item">Instagram</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">TikTok</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">LinkedIn</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">YouTube</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Facebook</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Meta&nbsp;Ads</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Google&nbsp;Ads</span><span class="marquee-sep">◆</span>
-      <span class="marquee-item">Threads</span><span class="marquee-sep">◆</span>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="szolgaltatasok" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="left anim anim-left">
-        <div class="eyebrow">01 — Szolgáltatások</div>
-        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Hat terület, egy rendszer</div>
-      </div>
-      <div class="right anim anim-d2">
-        <h2>Nem kampányokat szállítunk. <em class="display-italic" style="color:var(--gold)">Rendszert építünk,</em> amely hónapokon át dolgozik a márkádért.</h2>
-      </div>
-    </div>
-
-    <div class="services-grid">
-      <article class="service anim anim-scale anim-d1">
-        <div class="service-header">
-          <span class="service-num">/01</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1"/>
-            <path d="M14 5v9l6 3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Stratégia</h3>
-        <p>Piackutatás, versenytárselemzés, célközönség-térkép és éves tartalmi irány. A stratégia nem dokumentum — iránytű, amit minden hét használ.</p>
-        <ul>
-          <li>— Márka audit & pozicionálás</li>
-          <li>— Tartalmi pillérek</li>
-          <li>— KPI keretrendszer</li>
-        </ul>
-      </article>
-
-      <article class="service anim anim-scale anim-d2">
-        <div class="service-header">
-          <span class="service-num">/02</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <rect x="4" y="6" width="20" height="14" rx="1.5" stroke="currentColor" stroke-width="1"/>
-            <path d="M4 10h20M9 14h6" stroke="currentColor" stroke-width="1"/>
-          </svg>
-        </div>
-        <h3>Tartalomgyártás</h3>
-        <p>Forgatás, vágás, fotó, grafika és szövegírás. Saját stúdió Budapesten, mobilis forgatócsoport az ország bármely pontján.</p>
-        <ul>
-          <li>— Rövidvideó (Reels, TikTok)</li>
-          <li>— Statikus & carousel grafika</li>
-          <li>— Szövegírás, copy</li>
-        </ul>
-      </article>
-
-      <article class="service anim anim-scale anim-d3">
-        <div class="service-header">
-          <span class="service-num">/03</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M3 21 L10 13 L14 17 L22 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="22" cy="7" r="2" fill="currentColor"/>
-          </svg>
-        </div>
-        <h3>Hirdetéskezelés</h3>
-        <p>Meta, Google és TikTok hirdetési fiókok napi kezelése. Kreatív tesztelés, közönség-szegmentálás, ROAS-ra optimalizálva.</p>
-        <ul>
-          <li>— Meta Ads (Facebook, Instagram)</li>
-          <li>— Google Ads & YouTube</li>
-          <li>— TikTok Ads Manager</li>
-        </ul>
-      </article>
-
-      <article class="service anim anim-scale anim-d1">
-        <div class="service-header">
-          <span class="service-num">/04</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle cx="10" cy="11" r="4" stroke="currentColor" stroke-width="1"/>
-            <circle cx="19" cy="15" r="3" stroke="currentColor" stroke-width="1"/>
-            <path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Közösségépítés</h3>
-        <p>Moderáció, DM-kezelés, közösségi válaszok magyarul, a márka hangján. Egy márkának emberi hang kell — nem botos válaszok.</p>
-        <ul>
-          <li>— Válaszkezelés 24 órán belül</li>
-          <li>— Krízis-protokoll</li>
-          <li>— Közösségi események</li>
-        </ul>
-      </article>
-
-      <article class="service anim anim-scale anim-d2">
-        <div class="service-header">
-          <span class="service-num">/05</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M5 22V10M12 22V4M19 22V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>Analitika</h3>
-        <p>Heti dashboard, havi beszámolók és negyedéves retrospektív. Számok, kontextussal — nem képernyőfotók egy prezentációban.</p>
-        <ul>
-          <li>— Looker Studio dashboard</li>
-          <li>— GA4 & platform-analitika</li>
-          <li>— Hozzáférés a nyers adathoz</li>
-        </ul>
-      </article>
-
-      <article class="service anim anim-scale anim-d3">
-        <div class="service-header">
-          <span class="service-num">/06</span>
-          <svg class="service-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 3 L17 11 L25 11 L19 16 L21 24 L14 19 L7 24 L9 16 L3 11 L11 11 Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>Márkaépítés</h3>
-        <p>Vizuális identitás, hangnem-könyv, tipográfiai rendszer. Nemcsak logó — konzisztens nyelv, ami minden csatornán felismerhető.</p>
-        <ul>
-          <li>— Arculati kézikönyv</li>
-          <li>— Közösségi sablonrendszer</li>
-          <li>— Tone of voice dokumentum</li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- WEBSITE CREATION -->
-<section id="weboldal" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="left anim anim-left">
-        <div class="eyebrow">02 — Weboldalkészítés</div>
-        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Tervezés, fejlesztés, üzemeltetés</div>
-      </div>
-      <div class="right anim anim-d2">
-        <h2>A márkád <em class="display-italic" style="color:var(--gold)">az interneten</em> — nem csak a közösségi médián.</h2>
-      </div>
-    </div>
-
-    <div class="grid-12 anim anim-d1" style="align-items:center; gap:40px;">
-      <div style="grid-column: span 12;">
-        <p style="color:var(--mist);font-size:15.5px;line-height:1.8;max-width:720px;margin:0 0 40px">
-          A közösségi média hozza a figyelmet — a weboldalad váltja át vásárlássá, foglalássá, megkereséssé. Landing oldalaktól a komplett webshopokig saját csapattal dolgozunk: tervezés Figma-ban, fejlesztés modern keretrendszerben, és utána is mellettetek maradunk az üzemeltetésben.
-        </p>
-      </div>
-
-      <div style="grid-column: span 12;" class="anim anim-scale anim-d2">
-        <div class="browser-mock">
-          <div class="bar">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="url">harmatimagyarorszag.com/projekt</span>
-          </div>
-          <div class="content">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="blocks">
-              <div></div><div></div><div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="web-grid" style="margin-top:48px;">
-      <div class="web-feature anim anim-scale anim-d1">
-        <div class="num">/ 01</div>
-        <h4>Landing oldalak</h4>
-        <p>Kampányhoz kötött, egy célra optimalizált oldalak. A/B teszteléssel, konverziómérővel, heti finomhangolással.</p>
-      </div>
-      <div class="web-feature anim anim-scale anim-d2">
-        <div class="num">/ 02</div>
-        <h4>Márkahonlapok</h4>
-        <p>Prezentációs oldalak, amelyek a márka nyelvén beszélnek. Egyedi tervezés, nem sablonból — Figma-ban kezdjük, kóddal zárjuk.</p>
-      </div>
-      <div class="web-feature anim anim-scale anim-d3">
-        <div class="num">/ 03</div>
-        <h4>Webshopok</h4>
-        <p>Shopify, WooCommerce vagy egyedi megoldás. Termékkatalógus, fizetés, készletkezelés, számlázás — egybekötve.</p>
-      </div>
-      <div class="web-feature anim anim-scale anim-d4">
-        <div class="num">/ 04</div>
-        <h4>Üzemeltetés</h4>
-        <p>Nem csak átadjuk és elköszönünk. Havi karbantartás, frissítések, biztonsági mentések, és 24 órán belüli hibajavítás.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- AI — 3D PHONE -->
-<section id="ai" class="section">
-  <span class="orb" style="width:380px;height:380px;top:40px;left:-120px;background:radial-gradient(circle, var(--gold) 0%, transparent 70%);"></span>
-  <span class="orb" style="width:260px;height:260px;bottom:40px;right:-80px;background:radial-gradient(circle, var(--dew) 0%, transparent 70%); animation-delay: -7s;"></span>
-
-  <div class="container" style="position:relative;">
-    <div class="section-head">
-      <div class="left anim anim-left">
-        <div class="eyebrow">03 — MI-vezérelt növekedés</div>
-        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">2026. évi eszközpark</div>
-      </div>
-      <div class="right anim anim-d2">
-        <h2>A legújabb AI modellekkel dolgozunk — <em class="display-italic" style="color:var(--gold)">a maximális növekedésért.</em></h2>
-      </div>
-    </div>
-
-    <div class="ai-grid">
-      <div class="ai-features">
-        <div class="ai-feature anim anim-left anim-d1">
-          <div class="diamond">◆</div>
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
           <div>
-            <h3>Generatív kreatív</h3>
-            <p>A vizuális koncepciók és változatok Claude, GPT és Midjourney modellekkel készülnek — húszszoros sebesség, ember által gondozott minőség.</p>
+            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>03 — MI-vezérelt növekedés</div>
+            <div style={{ marginTop: 24, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>2026. évi eszközpark</div>
+          </div>
+          <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
+            A legújabb AI modellekkel dolgozunk —{' '}
+            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>a maximális növekedésért.</em>
+          </h2>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+            {features.map((f, i) => (
+              <div key={i} style={{ display: 'flex', gap: 20 }}>
+                <div style={{ fontFamily: "'Instrument Serif',serif", fontSize: 36, lineHeight: 1, color: '#3a8c63', flexShrink: 0 }}>◆</div>
+                <div>
+                  <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 24, color: '#f2ede2', margin: 0 }}>{f.title}</h3>
+                  <p style={{ margin: '8px 0 0', color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{f.p}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ position: 'relative', aspectRatio: '1/1', maxWidth: 520, margin: '0 auto', width: '100%' }}>
+            <span style={{ position: 'absolute', fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', top: 16, left: 16, color: '#3a8c63', zIndex: 2, pointerEvents: 'none' }}>model :: live</span>
+            <span style={{ position: 'absolute', fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', bottom: 16, right: 16, color: '#7a8a7e', zIndex: 2, pointerEvents: 'none' }}>harmati.mi · 2026</span>
+            <canvas ref={canvasRef} id="phone-canvas" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', cursor: 'grab', touchAction: 'none' }} />
+            <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', background: 'radial-gradient(circle at 50% 50%,transparent 45%,rgba(11,18,14,0.75)85%)' }} />
+            <span style={{ position: 'absolute', left: '50%', bottom: 16, transform: 'translateX(-50%)', display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 999, background: 'rgba(11,18,14,0.8)', border: '1px solid #2a3d30', color: '#c8c5bd', fontFamily: "'Geist Mono',monospace", fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', zIndex: 2, pointerEvents: 'none', opacity: 0.8 }}>⟲ fogd meg és forgasd</span>
           </div>
         </div>
-        <div class="ai-feature anim anim-left anim-d2">
-          <div class="diamond">◆</div>
-          <div>
-            <h3>Prediktív hirdetés-optimalizáció</h3>
-            <p>A platformok natív AI-ja mellett saját előrejelző modelljeink is futnak. A kreatív-kimerülést órákkal előre látjuk, nem napokkal utólag.</p>
-          </div>
-        </div>
-        <div class="ai-feature anim anim-left anim-d3">
-          <div class="diamond">◆</div>
-          <div>
-            <h3>Tartalom-asszisztensek</h3>
-            <p>Egyedi promptrendszerek márkánként: a hangnem, a szókincs és a tabuk mind dokumentáltan benne vannak a modellekben.</p>
-          </div>
-        </div>
-        <div class="ai-feature anim anim-left anim-d4">
-          <div class="diamond">◆</div>
-          <div>
-            <h3>Adat-intelligencia</h3>
-            <p>Heti AI-elemzés a teljesítményről: mi mozog, miért, és mi a következő három kísérlet. Emberi stratégiai döntés, MI-alapú előkészítéssel.</p>
-          </div>
-        </div>
       </div>
+    </section>
+  );
+};
 
-      <div class="anim anim-right anim-d2">
-        <div class="phone-stage">
-          <span class="phone-label tl">model :: live</span>
-          <span class="phone-label br">harmati.mi · 2026</span>
-          <canvas id="phone-canvas" class="phone-canvas" aria-label="Forgatható 3D telefon"></canvas>
-          <span class="phone-hint">⟲ fogd meg és forgasd</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+/* ── Approach Section ── */
+const ApproachSection = () => (
+  <section id="megkozelites" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
+    <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63', marginBottom: 24 }}>05 — Megközelítés</div>
 
-<!-- PROCESS -->
-<section id="folyamat" class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="left anim anim-left">
-        <div class="eyebrow">04 — Munkafolyamat</div>
-        <div class="font-mono" style="margin-top:24px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)">Négy szakasz, egy ritmus</div>
-      </div>
-      <div class="right anim anim-d2">
-        <h2>Minden együttműködés ugyanígy indul — <em class="display-italic" style="color:var(--gold)">de sosem ugyanott végződik.</em></h2>
-      </div>
-    </div>
-
-    <div class="process-grid">
-      <div class="process-step active anim anim-d1">
-        <span class="dot"></span>
-        <div class="when">01 — Hét 1</div>
-        <h3>Felfedezés</h3>
-        <p>Mélyinterjú a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás. Megértjük, hol tart most a márka.</p>
-      </div>
-
-      <div class="process-step anim anim-d2">
-        <span class="dot"></span>
-        <div class="when">02 — Hét 2–3</div>
-        <h3>Stratégia</h3>
-        <p>Pozicionálás, közönség, tartalmi pillérek, csatorna-súlyozás és hirdetési keret. Írásos dokumentum, prezentáció és egyoldalas iránytű.</p>
-      </div>
-
-      <div class="process-step anim anim-d3">
-        <span class="dot"></span>
-        <div class="when">03 — Hónap 2+</div>
-        <h3>Kivitelezés</h3>
-        <p>Havi tartalmi naptár, heti forgatás, napi közzététel és moderáció. Hirdetések futnak, kreatívok tesztelődnek. Minden a helyén.</p>
-      </div>
-
-      <div class="process-step anim anim-d4">
-        <span class="dot"></span>
-        <div class="when">04 — Negyedévenként</div>
-        <h3>Optimalizáció</h3>
-        <p>Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus. A második negyedév soha nem olyan, mint az első.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- APPROACH / 05 — REWORKED -->
-<section id="megkozelites" class="section">
-  <div class="container">
-    <div class="eyebrow anim anim-left" style="margin-bottom:24px;">05 — Megközelítés</div>
-
-    <div class="approach-intro">
-      <div class="anim anim-left anim-d1">
-        <h2>
-          A figyelem nem kampány.<br>
-          <em class="display-italic" style="color:var(--gold)">Naponta épül —</em><br>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, marginBottom: 80 }}>
+        <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,5.2rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
+          A figyelem nem kampány.<br />
+          <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Naponta épül —</em><br />
           vagy naponta&nbsp;ér véget.
         </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          {[
+            'A közösségi média <strong>nem reklámcsatorna</strong>, hanem a márkád mindennapi viselkedése a nyilvánosság előtt. Hogyan szólal meg, mire reagál, mit ismer el, és mikor marad csendben — ezek a kérdések minden nap újra eldőlnek.',
+            'A Harmati Magyarország feladata, hogy ez a viselkedés <strong>következetes, hiteles és mérhető</strong> maradjon. Nincsenek csodareceptek, és nincs olyan "titkos fogás", amit egy jó agenciától meg lehetne venni.',
+            'Nem vállalunk egyszerre nyolcnál több aktív márkát. Nem dolgozunk automatizált MI-posztokkal. És nem vesszük fel azt a projektet, amelyben mi magunk sem hiszünk.',
+          ].map((t, i) => <p key={i} style={{ color: '#c8c5bd', fontSize: 15, lineHeight: 1.8, margin: 0 }} dangerouslySetInnerHTML={{ __html: t.replace(/<strong>/g, '<strong style="color:#f2ede2;font-weight:500">') }} />)}
+        </div>
       </div>
 
-      <div class="approach-body anim anim-right anim-d2">
-        <p>
-          A közösségi média <strong>nem reklámcsatorna</strong>, hanem a márkád mindennapi viselkedése a nyilvánosság előtt. Hogyan szólal meg, mire reagál, mit ismer el, és mikor marad csendben — ezek a kérdések minden nap újra eldőlnek. Egy kampánnyal nem lehet őket lezárni.
-        </p>
-        <p>
-          A Harmati Magyarország feladata, hogy ez a viselkedés <strong>következetes, hiteles és mérhető</strong> maradjon. Nincsenek csodareceptek, és nincs olyan <em>„titkos fogás"</em>, amit egy jó agenciától meg lehetne venni. Helyette van iparos figyelem, heti ritmus és átláthatóan vezetett számok.
-        </p>
-        <p>
-          Nem vállalunk egyszerre nyolcnál több aktív márkát. Nem dolgozunk automatizált MI-posztokkal, amelyek mögött nincs emberi szerkesztés. És nem vesszük fel azt a projektet, amelyben mi magunk sem hiszünk — mert a közönség fél éven belül észreveszi.
-        </p>
+      <div style={{ padding: 48, border: '1px solid #1f2e25', background: 'linear-gradient(180deg,rgba(201,164,107,0.045)0%,transparent 100%),#111a14', position: 'relative', overflow: 'hidden', marginBottom: 64 }}>
+        <div style={{ position: 'absolute', top: -20, left: 20, fontFamily: "'Instrument Serif',serif", fontSize: 160, color: '#3a8c63', opacity: 0.18, lineHeight: 1, pointerEvents: 'none' }}>„</div>
+        <blockquote style={{ fontFamily: "'Instrument Serif',serif", fontStyle: 'italic', fontSize: 'clamp(1.4rem,2.8vw,2.2rem)', lineHeight: 1.3, letterSpacing: '-0.02em', color: '#f2ede2', position: 'relative', zIndex: 1 }}>
+          A márka nem abból él, amit egyszer mondott magáról. Abból, amit minden nap megismétel — szóval, képpel, válaszadással, vagy épp a csenddel.
+        </blockquote>
+        <cite style={{ display: 'block', marginTop: 24, fontFamily: "'Geist Mono',monospace", fontStyle: 'normal', fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e' }}>— Harmati műhely, 2026</cite>
+      </div>
+
+      <div className="principles">
+        {[
+          { r: 'i.',   h: 'Átlátható beszámolók',    p: 'A nyers adat a tiéd. Minden kampány, minden hirdetési forint nyomon követhető.' },
+          { r: 'ii.',  h: 'Magyar piac, magyar nyelv', p: 'A stratégia és a szöveg Magyarországon készül. Kulturális kontextus nélkül nincs jó kommunikáció.' },
+          { r: 'iii.', h: 'Havi ritmus, nem sprint',  p: 'Minimum négy hónapos együttműködésben dolgozunk. Rövidebb idő alatt nem mérhető, mi számít.' },
+          { r: 'iv.',  h: 'Egy kapcsolattartó',       p: 'Egy dedikált stratéga kíséri végig a projektet. Nincsenek átadások, nincsenek elveszett e-mailek.' },
+          { r: 'v.',   h: 'Kis portfólió, mély figyelem', p: 'Egyszerre legfeljebb nyolc aktív márkát kísérünk. Inkább mondunk nemet, mint hogy felületesek legyünk.' },
+          { r: 'vi.',  h: 'Tulajdonosi hozzáférés',   p: 'Minden fiók, domain és adat a tiéd marad. Ha egyszer külön utakra térünk, semmit nem kell visszakérned.' },
+        ].map((p, i) => (
+          <div key={i} className="principle">
+            <div style={{ fontFamily: "'Instrument Serif',serif", fontSize: 44, lineHeight: 1, color: '#3a8c63' }}>{p.r}</div>
+            <h4 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 22, lineHeight: 1.2, color: '#f2ede2', margin: '20px 0 10px' }}>{p.h}</h4>
+            <p style={{ margin: 0, color: '#c8c5bd', fontSize: 13.5, lineHeight: 1.7 }}>{p.p}</p>
+          </div>
+        ))}
       </div>
     </div>
+  </section>
+);
 
-    <!-- Pull quote / manifesto -->
-    <div class="pull-quote anim anim-scale anim-d1">
-      <blockquote>
-        A márka nem abból él, amit egyszer mondott magáról. Abból, amit minden nap megismétel —&nbsp;szóval, képpel, válaszadással, vagy épp a csenddel.
-      </blockquote>
-      <cite>— Harmati műhely, 2026</cite>
-    </div>
-
-    <!-- PRINCIPLES (6) -->
-    <div class="principles">
-      <div class="principle anim anim-scale anim-d1">
-        <div class="roman">i.</div>
-        <h4>Átlátható beszámolók</h4>
-        <p>A nyers adat a tiéd. Minden kampány, minden hirdetési forint nyomon követhető.</p>
+/* ── Process Section ── */
+const ProcessSection = () => (
+  <section id="folyamat" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
+    <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
+        <div>
+          <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>04 — Munkafolyamat</div>
+          <div style={{ marginTop: 24, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>Négy szakasz, egy ritmus</div>
+        </div>
+        <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
+          Minden együttműködés ugyanígy indul —{' '}
+          <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>de sosem ugyanott végződik.</em>
+        </h2>
       </div>
-      <div class="principle anim anim-scale anim-d2">
-        <div class="roman">ii.</div>
-        <h4>Magyar piac, magyar nyelv</h4>
-        <p>A stratégia és a szöveg Magyarországon készül. Kulturális kontextus nélkül nincs jó kommunikáció.</p>
-      </div>
-      <div class="principle anim anim-scale anim-d3">
-        <div class="roman">iii.</div>
-        <h4>Havi ritmus, nem sprint</h4>
-        <p>Minimum négy hónapos együttműködésben dolgozunk. Rövidebb idő alatt nem mérhető, mi számít.</p>
-      </div>
-      <div class="principle anim anim-scale anim-d1">
-        <div class="roman">iv.</div>
-        <h4>Egy kapcsolattartó</h4>
-        <p>Egy dedikált stratéga kíséri végig a projektet. Nincsenek átadások, nincsenek elveszett e-mailek.</p>
-      </div>
-      <div class="principle anim anim-scale anim-d2">
-        <div class="roman">v.</div>
-        <h4>Kis portfólió, mély figyelem</h4>
-        <p>Egyszerre legfeljebb nyolc aktív márkát kísérünk. Inkább mondunk nemet, mint hogy felületesek legyünk.</p>
-      </div>
-      <div class="principle anim anim-scale anim-d3">
-        <div class="roman">vi.</div>
-        <h4>Tulajdonosi hozzáférés</h4>
-        <p>Minden fiók, domain és adat a tiéd marad. Ha egyszer külön utakra térünk, semmit nem kell visszakérned.</p>
+      <div className="process-grid">
+        {[
+          { when: '01 — Hét 1',      title: 'Felfedezés',   active: true,  p: 'Mélyinterjú a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás.' },
+          { when: '02 — Hét 2–3',    title: 'Stratégia',    active: false, p: 'Pozicionálás, közönség, tartalmi pillérek, csatorna-súlyozás és hirdetési keret. Írásos dokumentum.' },
+          { when: '03 — Hónap 2+',   title: 'Kivitelezés',  active: false, p: 'Havi tartalmi naptár, heti forgatás, napi közzététel és moderáció. Hirdetések futnak, kreatívok tesztelődnek.' },
+          { when: '04 — Negyedévenként', title: 'Optimalizáció', active: false, p: 'Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus.' },
+        ].map((s, i) => (
+          <div key={i} className={`process-step${s.active ? ' active' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
+            <span className="dot" />
+            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: s.active ? '#3a8c63' : '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
+            <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 32, lineHeight: 1.05, color: '#f2ede2', margin: 0 }}>{s.title}</h3>
+            <p style={{ marginTop: 16, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{s.p}</p>
+          </div>
+        ))}
       </div>
     </div>
+  </section>
+);
 
-    <!-- COMMITMENTS -->
-    <div class="commitments">
-      <h3 class="commitments-head anim anim-left anim-d1">
-        Amit <em class="display-italic" style="color:var(--gold)">garantálunk</em>, és amit sosem fogunk megígérni.
-      </h3>
+/* ── Contact Section ── */
+const ContactSection = () => {
+  const [chips, setChips] = useState([]);
+  const toggleChip = (c) => setChips(prev => prev.includes(c) ? prev.filter(x => x !== c) : [...prev, c]);
+  const [toast, setToast] = useState('');
+  const copy = (text, label) => {
+    navigator.clipboard?.writeText(text).catch(() => {});
+    setToast(`${label} · ${text}`);
+    setTimeout(() => setToast(''), 2200);
+  };
 
-      <div class="commitments-list">
-        <div class="commit-row anim anim-d1">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>Minden hónap elején</strong> közös stratégiai megbeszélés videón. Jelen van a stratéga és a kampánymenedzser is.</div>
-        </div>
-
-        <div class="commit-row anim anim-d2">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>Tartalmi naptár előre két héttel.</strong> Minden posztot, videót és hirdetést látsz, mielőtt megjelenne.</div>
-        </div>
-
-        <div class="commit-row anim anim-d1">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>Válasz 24 órán belül</strong> minden e-mailre és üzenetre, munkanapokon. Nem csak a stratégiai kérdésekre — a kicsikre is.</div>
-        </div>
-
-        <div class="commit-row anim anim-d2">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>Nem ígérünk konkrét követőszámot.</strong> Aki garantál, nem ért hozzá, vagy botokat vesz. Mi mérhető üzleti eredményekért dolgozunk.</div>
-        </div>
-
-        <div class="commit-row anim anim-d1">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>Soha nem teszünk közzé tartalmat jóváhagyás nélkül.</strong> Az első három hónapban minden posztot látsz előtte; utána a ritmus bizalmon alapul.</div>
-        </div>
-
-        <div class="commit-row anim anim-d2">
-          <div class="check">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 7l3 3 6-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="text"><strong>30 napos felmondás, bármikor.</strong> Ha nem működik az együttműködés, nem kötünk béklyóba. Hosszú szerződésekhez nincs érvényes érvünk.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="kapcsolat" class="section" style="overflow:hidden;">
-  <div style="position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:60rem;height:60rem;border-radius:999px;pointer-events:none;background:radial-gradient(circle, rgba(201,164,107,0.13) 0%, rgba(201,164,107,0) 55%);"></div>
-
-  <div class="container" style="position:relative;">
-    <div class="contact-grid">
-      <div class="contact-left anim anim-left anim-d1">
-        <div class="eyebrow">06 — Kapcsolat</div>
-        <h2>Írj nekünk. <em class="display-italic" style="color:var(--gold)">Egy héten belül</em> leülünk beszélgetni.</h2>
-
-        <div class="contact-lines">
-          <button type="button" class="contact-line" data-copy="andor@harmatimagyarorszag.com" data-copy-label="E-mail másolva">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4.5 L8 9 L14 4.5 M2 4.5 V11.5 A1 1 0 0 0 3 12.5 H13 A1 1 0 0 0 14 11.5 V4.5 A1 1 0 0 0 13 3.5 H3 A1 1 0 0 0 2 4.5 Z" stroke="currentColor" stroke-width="1.2"/></svg>
-            <span>andor@harmatimagyarorszag.com</span>
-            <span class="copy-hint">— másolás</span>
-          </button>
-
-          <button type="button" class="contact-line" data-copy="+36 30 688 6036" data-copy-label="Telefonszám másolva">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3 L5 3 L6.5 6 L5 7 C5 9 7 11 9 11 L10 9.5 L13 11 V13 C13 13.5 12.5 14 12 14 C7 14 2 9 2 4 C2 3.5 2.5 3 3 3 Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
-            <span>+36 30 688 6036</span>
-            <span class="copy-hint">— másolás</span>
-          </button>
-
-          <div class="contact-socials">
-            <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
-            </a>
-            <span class="handle">@harmatimagyarorszag</span>
-          </div>
-        </div>
-
-        <div class="contact-capacity">
-          <div class="rule-label" style="margin-bottom:24px;justify-content:flex-start;">
-            <span>Jelenlegi kapacitás</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-            <span class="ping-dot"></span>
-            <span style="font-size:14px;color:var(--ivory);">2026 Q2 — 2 új ügyfelet fogadunk</span>
-          </div>
-          <div class="font-mono" style="font-size:12px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;">Átlagos ügyfél-együttműködés: 2,7 év</div>
-        </div>
-      </div>
-
-      <div class="anim anim-right anim-d2">
-        <form class="contact-form" id="contact-form" action="mailto:andor@harmatimagyarorszag.com" method="post" enctype="text/plain">
-          <div class="form-row">
-            <div class="field">
-              <label>Név</label>
-              <input name="Név" type="text" required />
+  return (
+    <section id="kapcsolat" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: -80, left: '50%', transform: 'translateX(-50%)', width: '60rem', height: '60rem', borderRadius: '999px', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(201,164,107,0.10)0%,rgba(201,164,107,0)55%)' }} />
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start' }}>
+          <div>
+            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>06 — Kapcsolat</div>
+            <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: '24px 0 0' }}>
+              Írj nekünk.{' '}
+              <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Egy héten belül</em>{' '}
+              leülünk beszélgetni.
+            </h2>
+            <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 18 }}>
+              {[
+                { icon: <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4.5 L8 9 L14 4.5 M2 4.5 V11.5 A1 1 0 0 0 3 12.5 H13 A1 1 0 0 0 14 11.5 V4.5 A1 1 0 0 0 13 3.5 H3 A1 1 0 0 0 2 4.5 Z" stroke="currentColor" strokeWidth="1.2"/></svg>, val: 'andor@harmatimagyarorszag.com', label: 'E-mail másolva' },
+                { icon: <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3 L5 3 L6.5 6 L5 7 C5 9 7 11 9 11 L10 9.5 L13 11 V13 C13 13.5 12.5 14 12 14 C7 14 2 9 2 4 C2 3.5 2.5 3 3 3 Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/></svg>, val: '+36 30 688 6036', label: 'Telefonszám másolva' },
+              ].map((item, i) => (
+                <button key={i} onClick={() => copy(item.val, item.label)} style={{
+                  display: 'flex', alignItems: 'center', gap: 12,
+                  background: 'transparent', border: 0, color: '#c8c5bd',
+                  cursor: 'pointer', padding: 0, fontFamily: "'Geist Mono',monospace", fontSize: 13,
+                }}>
+                  <span style={{ color: '#3a8c63' }}>{item.icon}</span>
+                  <span>{item.val}</span>
+                  <span style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e' }}>— másolás</span>
+                </button>
+              ))}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, paddingTop: 4 }}>
+                {[
+                  { href: 'https://www.instagram.com/harmatimagyarorszag/', label: 'Instagram', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg> },
+                  { href: 'https://www.tiktok.com/@harmatimagyarorszag', label: 'TikTok', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg> },
+                ].map(({ href, label, icon }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener" aria-label={label}
+                    style={{ width: 38, height: 38, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', border: '1px solid #2a3d30', color: '#c8c5bd', textDecoration: 'none', transition: 'border-color 300ms, color 300ms, transform 300ms' }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor='#3a8c63'; e.currentTarget.style.color='#3a8c63'; e.currentTarget.style.transform='translateY(-2px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor='#2a3d30'; e.currentTarget.style.color='#c8c5bd'; e.currentTarget.style.transform='translateY(0)'; }}>
+                    {icon}
+                  </a>
+                ))}
+                <span style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>@harmatimagyarorszag</span>
+              </div>
             </div>
-            <div class="field">
-              <label>Cégnév</label>
-              <input name="Cégnév" type="text" />
+            <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid #1f2e25' }}>
+              <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e', marginBottom: 24 }}>Jelenlegi kapacitás</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                <PingDot />
+                <span style={{ fontSize: 14, color: '#f2ede2' }}>2026 Q2 — 2 új ügyfelet fogadunk</span>
+              </div>
+              <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, color: '#7a8a7e', letterSpacing: '0.14em', textTransform: 'uppercase', marginTop: 8 }}>Átlagos ügyfél-együttműködés: 2,7 év</div>
             </div>
           </div>
 
-          <div class="field">
-            <label>Email</label>
-            <input name="Email" type="email" required />
-          </div>
-
-          <div class="field">
-            <div class="lbl">Érdekelt szolgáltatás</div>
-            <div class="chip-group">
-              <label class="chip"><input type="checkbox" name="Stratégia" value="igen" /> Stratégia</label>
-              <label class="chip"><input type="checkbox" name="Tartalom" value="igen" /> Tartalom</label>
-              <label class="chip"><input type="checkbox" name="Hirdetés" value="igen" /> Hirdetés</label>
-              <label class="chip"><input type="checkbox" name="Közösség" value="igen" /> Közösség</label>
-              <label class="chip"><input type="checkbox" name="Márkaépítés" value="igen" /> Márkaépítés</label>
-              <label class="chip"><input type="checkbox" name="Weboldal" value="igen" /> Weboldal</label>
+          <form style={{ background: 'linear-gradient(180deg,rgba(255,255,255,0.025),transparent 60%),#111a14', border: '1px solid #1f2e25', padding: 40, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+              <div className="field"><label>Név</label><input type="text" /></div>
+              <div className="field"><label>Cégnév</label><input type="text" /></div>
             </div>
-          </div>
+            <div className="field"><label>Email</label><input type="email" /></div>
+            <div className="field">
+              <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e', marginBottom: 8 }}>Érdekelt szolgáltatás</div>
+              <div className="chip-group">
+                {['Stratégia','Tartalom','Hirdetés','Közösség','Márkaépítés','Weboldal'].map(c => (
+                  <div key={c} className={`chip${chips.includes(c) ? ' active' : ''}`} onClick={() => toggleChip(c)}>{c}</div>
+                ))}
+              </div>
+            </div>
+            <div className="field"><label>Röviden a projektről</label><textarea rows="4"></textarea></div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, paddingTop: 8 }}>
+              <p style={{ margin: 0, maxWidth: 260, fontSize: 11.5, color: '#7a8a7e', lineHeight: 1.55 }}>A beküldéssel elfogadod az adatvédelmi nyilatkozatot.</p>
+              <LiquidButton primary>
+                Küldés
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
+              </LiquidButton>
+            </div>
+          </form>
+        </div>
+      </div>
 
-          <div class="field">
-            <label>Röviden a projektről</label>
-            <textarea name="Üzenet" rows="4"></textarea>
-          </div>
+      {toast && (
+        <div style={{
+          position: 'fixed', left: '50%', bottom: 32,
+          transform: 'translateX(-50%)',
+          background: '#162019', border: '1px solid #3a8c63', color: '#f2ede2',
+          padding: '12px 20px', borderRadius: 999,
+          fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase',
+          boxShadow: '0 10px 40px rgba(58,140,99,0.25)', zIndex: 100,
+        }}>
+          {toast}
+        </div>
+      )}
+    </section>
+  );
+};
 
-          <div class="form-footer">
-            <p>A beküldéssel elfogadod az adatvédelmi nyilatkozatot. Egy héten belül válaszolunk.</p>
-            <button type="submit" class="liquid liquid-gold">
-              Küldés
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            </button>
-          </div>
-        </form>
+/* ── Marquee ── */
+const Marquee = () => {
+  const items = ['Instagram','TikTok','LinkedIn','YouTube','Facebook','Meta Ads','Google Ads','Threads'];
+  const group = items.flatMap((item, i) => [
+    <span key={`i${i}`} className="marquee-item">{item}</span>,
+    <span key={`s${i}`} className="marquee-sep">◆</span>,
+  ]);
+  return (
+    <div className="marquee-section">
+      <div className="marquee-track">
+        <div className="marquee-group">{group}</div>
+        <div className="marquee-group">{group}</div>
       </div>
     </div>
-  </div>
-</section>
+  );
+};
 
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="anim anim-d1">
-      <div class="brand">
-        <span class="logo-circle logo-xs">
-          <img src="brand_assets/logo.png" alt="Harmati logó" />
-        </span>
-        <span class="brand-text" style="font-size:20px;">Harmati <em>Magyarország</em></span>
-      </div>
-      <p class="footer-desc">
-        Független közösségi média műhely. Magyar márkáknak, hosszú távú figyelemre hangolva.
-      </p>
-      <div class="footer-socials">
-        <a href="https://www.instagram.com/harmatimagyarorszag/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://www.tiktok.com/@harmatimagyarorszag" target="_blank" rel="noopener" class="social-btn" aria-label="TikTok">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 6.8a5.3 5.3 0 0 1-3.3-1.1 5.3 5.3 0 0 1-2-3.7h-3.2v13.4a2.6 2.6 0 1 1-1.8-2.5V9.6a5.8 5.8 0 1 0 5 5.7V9.8a8.4 8.4 0 0 0 5.3 1.8z"/></svg>
-        </a>
-      </div>
-    </div>
+/* ── Root App ── */
+const App = () => {
+  const scrollToContact = () => {
+    const el = document.getElementById('kapcsolat');
+    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+  };
 
-    <div class="footer-cols anim anim-d2">
-      <div class="footer-col">
-        <h6>Cég</h6>
-        <ul>
-          <li><a href="#megkozelites">Megközelítés</a></li>
-          <li><a href="#folyamat">Munkafolyamat</a></li>
-          <li><a href="#kapcsolat">Kapcsolat</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h6>Szolgáltatás</h6>
-        <ul>
-          <li><a href="#szolgaltatasok">Stratégia</a></li>
-          <li><a href="#szolgaltatasok">Tartalom</a></li>
-          <li><a href="#szolgaltatasok">Hirdetés</a></li>
-          <li><a href="#weboldal">Weboldal</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h6>Jogi</h6>
-        <ul>
-          <li><a href="#">Adatvédelem</a></li>
-          <li><a href="#">ÁSZF</a></li>
-          <li><a href="#">Impresszum</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  return (
+    <>
+      <HarmatiHeader />
+      <main>
+        <HeroScrub
+          frameCount={300}
+          frameUrl={(i) => `https://raw.githubusercontent.com/duthiljean/ferrari-hero-demo/main/${String(i + 1).padStart(4, "0")}.webp`}
+          titleTop="A közösségi"
+          titleBottom="média művészete"
+          bgColor="#0b120e"
+          accentHex="#1a2e20"
+          defaultAspect={16 / 9}
+        />
+        <Marquee />
+        <HarmatiServices />
+        <AISection />
+        <ProcessSection />
+        <ApproachSection />
+        <ContactSection />
+      </main>
+      <HarmatiFooter />
+    </>
+  );
+};
 
-  <div class="footer-bottom">
-    <div>© 2026 Harmati Magyarország Kft. — Minden jog fenntartva.</div>
-    <div class="right">
-      <span style="display:inline-flex;align-items:center;gap:8px;"><span class="ping-dot"></span> Új projektekre nyitva</span>
-      <span>Europe/Budapest · v2026.04</span>
-    </div>
-  </div>
-</footer>
-
-<!-- Toast -->
-<div id="toast" class="toast">Másolva</div>
-
-<!-- Three.js via importmap for the 3D phone -->
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-  }
-}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 
-<script type="module" src="scripts.js"></script>
+<div id="root"></div>
 
+<script type="module">
+import * as THREE from "three";
+
+function initPhone3D(canvas) {
+  if (!canvas || canvas.__phoneInit) return;
+  canvas.__phoneInit = true;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+  camera.position.set(0, 0, 7);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+
+  const phone = new THREE.Group();
+  scene.add(phone);
+
+  const W = 1.55, H = 3.1, R = 0.28, D = 0.2;
+  const shape = new THREE.Shape();
+  shape.moveTo(-W/2+R,-H/2); shape.lineTo(W/2-R,-H/2);
+  shape.quadraticCurveTo(W/2,-H/2,W/2,-H/2+R); shape.lineTo(W/2,H/2-R);
+  shape.quadraticCurveTo(W/2,H/2,W/2-R,H/2); shape.lineTo(-W/2+R,H/2);
+  shape.quadraticCurveTo(-W/2,H/2,-W/2,H/2-R); shape.lineTo(-W/2,-H/2+R);
+  shape.quadraticCurveTo(-W/2,-H/2,-W/2+R,-H/2);
+
+  const bodyGeo = new THREE.ExtrudeGeometry(shape, { depth:D, bevelEnabled:true, bevelThickness:0.06, bevelSize:0.05, bevelSegments:8, curveSegments:28 });
+  bodyGeo.center();
+  const body = new THREE.Mesh(bodyGeo, new THREE.MeshStandardMaterial({ color:0x14161c, metalness:0.85, roughness:0.28 }));
+  phone.add(body);
+
+  const railShape = new THREE.Shape();
+  const rW=W+0.02,rH=H+0.02,rR=R+0.01;
+  railShape.moveTo(-rW/2+rR,-rH/2); railShape.lineTo(rW/2-rR,-rH/2);
+  railShape.quadraticCurveTo(rW/2,-rH/2,rW/2,-rH/2+rR); railShape.lineTo(rW/2,rH/2-rR);
+  railShape.quadraticCurveTo(rW/2,rH/2,rW/2-rR,rH/2); railShape.lineTo(-rW/2+rR,rH/2);
+  railShape.quadraticCurveTo(-rW/2,rH/2,-rW/2,rH/2-rR); railShape.lineTo(-rW/2,-rH/2+rR);
+  railShape.quadraticCurveTo(-rW/2,-rH/2,-rW/2+rR,-rH/2);
+  const hole = new THREE.Path();
+  const iW=W-0.04,iH=H-0.04,iR=R-0.01;
+  hole.moveTo(-iW/2+iR,-iH/2); hole.lineTo(iW/2-iR,-iH/2);
+  hole.quadraticCurveTo(iW/2,-iH/2,iW/2,-iH/2+iR); hole.lineTo(iW/2,iH/2-iR);
+  hole.quadraticCurveTo(iW/2,iH/2,iW/2-iR,iH/2); hole.lineTo(-iW/2+iR,iH/2);
+  hole.quadraticCurveTo(-iW/2,iH/2,-iW/2,iH/2-iR); hole.lineTo(-iW/2,-iH/2+iR);
+  hole.quadraticCurveTo(-iW/2,-iH/2,-iW/2+iR,-iH/2);
+  railShape.holes.push(hole);
+  const railGeo = new THREE.ExtrudeGeometry(railShape, { depth:D+0.04, bevelEnabled:false, curveSegments:28 });
+  railGeo.center();
+  phone.add(new THREE.Mesh(railGeo, new THREE.MeshStandardMaterial({ color:0x40916c, metalness:1, roughness:0.18, emissive:0x1b4332, emissiveIntensity:0.35 })));
+
+  const tc = document.createElement('canvas'); tc.width=540; tc.height=1080;
+  const g = tc.getContext('2d');
+  const grad = g.createLinearGradient(0,0,0,tc.height);
+  grad.addColorStop(0,'#0c0e14'); grad.addColorStop(0.5,'#121520'); grad.addColorStop(1,'#0a0c12');
+  g.fillStyle=grad; g.fillRect(0,0,tc.width,tc.height);
+  const rad2 = g.createRadialGradient(tc.width*0.3,tc.height*0.2,0,tc.width*0.3,tc.height*0.2,tc.width*0.9);
+  rad2.addColorStop(0,'rgba(58,140,99,0.3)'); rad2.addColorStop(1,'rgba(58,140,99,0)');
+  g.fillStyle=rad2; g.fillRect(0,0,tc.width,tc.height);
+  g.fillStyle='#f2ede2'; g.font='600 28px monospace'; g.fillText('9:41',36,60); g.fillText('harmati',tc.width-190,60);
+  g.fillStyle='#f2ede2'; g.font='italic 90px serif'; g.fillText('Harmati',36,260);
+  g.fillStyle='#3a8c63'; g.font='italic 72px serif'; g.fillText('MI',390,260);
+  g.fillStyle='rgba(242,237,226,0.7)'; g.font='26px sans-serif'; g.fillText('MI-vezérelt növekedés',36,320);
+  const rr=(ctx,x,y,w,h,r)=>{ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();};
+  g.fillStyle='rgba(58,140,99,0.14)'; g.strokeStyle='rgba(58,140,99,0.7)'; g.lineWidth=2;
+  rr(g,36,380,tc.width-72,180,22); g.fill(); g.stroke();
+  g.fillStyle='#3a8c63'; g.font='600 22px monospace'; g.fillText('MODELL · LIVE',62,420);
+  g.fillStyle='#f2ede2'; g.font='italic 52px serif'; g.fillText('Growth +34%',62,490);
+  g.fillStyle='rgba(242,237,226,0.65)'; g.font='22px sans-serif'; g.fillText('Előrejelzés · 30 nap',62,540);
+  g.fillStyle='rgba(242,237,226,0.06)'; g.strokeStyle='rgba(242,237,226,0.18)';
+  rr(g,36,600,tc.width-72,160,22); g.fill(); g.stroke();
+  g.fillStyle='rgba(242,237,226,0.55)'; g.font='20px monospace'; g.fillText('ELEMZÉS',62,640);
+  g.fillStyle='#f2ede2'; g.font='italic 42px serif'; g.fillText('Heti riport kész',62,700);
+  g.fillStyle='rgba(242,237,226,0.5)'; g.font='22px sans-serif'; g.fillText('12 kreatív · 4 közönség',62,740);
+  const bars=[30,55,42,78,65,90,70,95];
+  const bx=36,by=880,bw=(tc.width-72-(bars.length-1)*8)/bars.length,bh=140;
+  bars.forEach((v,i)=>{const h2=(v/100)*bh; g.globalAlpha=0.3+(i/bars.length)*0.7; g.fillStyle='rgba(58,140,99,0.9)'; g.fillRect(bx+i*(bw+8),by+(bh-h2),bw,h2);});
+  g.globalAlpha=1;
+  g.fillStyle='rgba(242,237,226,0.4)'; rr(g,tc.width/2-70,tc.height-30,140,6,3); g.fill();
+
+  const tex = new THREE.CanvasTexture(tc);
+  tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(W-0.18,H-0.22), new THREE.MeshBasicMaterial({ map:tex }));
+  screen.position.z = D/2+0.062; phone.add(screen);
+
+  const island = new THREE.Mesh(new THREE.CapsuleGeometry(0.05,0.18,6,16), new THREE.MeshBasicMaterial({ color:0x05060a }));
+  island.rotation.z = Math.PI/2; island.position.set(0,H/2-0.22,D/2+0.063); phone.add(island);
+
+  const camBump = new THREE.Mesh(new THREE.CircleGeometry(0.13,36), new THREE.MeshStandardMaterial({ color:0x0a0c12, metalness:0.7, roughness:0.3 }));
+  camBump.position.set(-W/2+0.4,H/2-0.45,-D/2-0.05); camBump.rotation.y=Math.PI; phone.add(camBump);
+  const lens = new THREE.Mesh(new THREE.CircleGeometry(0.07,28), new THREE.MeshStandardMaterial({ color:0x181b22, metalness:1, roughness:0.15, emissive:0x40916c, emissiveIntensity:0.18 }));
+  lens.position.set(-W/2+0.4,H/2-0.45,-D/2-0.051); lens.rotation.y=Math.PI; phone.add(lens);
+
+  const btnMat = new THREE.MeshStandardMaterial({ color:0x52b788, metalness:1, roughness:0.3 });
+  const power = new THREE.Mesh(new THREE.BoxGeometry(0.04,0.45,0.08), btnMat); power.position.set(W/2+0.01,0.5,0); phone.add(power);
+  const volU = new THREE.Mesh(new THREE.BoxGeometry(0.04,0.35,0.08), btnMat); volU.position.set(-W/2-0.01,0.65,0); phone.add(volU);
+  const volD = new THREE.Mesh(new THREE.BoxGeometry(0.04,0.35,0.08), btnMat); volD.position.set(-W/2-0.01,0.2,0); phone.add(volD);
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.35));
+  const key = new THREE.DirectionalLight(0xb8e6d5,2.2); key.position.set(3,4,4); scene.add(key);
+  const fill = new THREE.DirectionalLight(0x8ab8c4,0.8); fill.position.set(-4,-2,3); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0x40916c,1.2); rim.position.set(0,-3,-5); scene.add(rim);
+
+  phone.rotation.y = -0.4; phone.rotation.x = 0.15;
+
+  function resize() {
+    const r = canvas.getBoundingClientRect();
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / r.height;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  let isDown=false, lastX=0, lastY=0, velX=0, velY=0, lastInteract=performance.now();
+  canvas.addEventListener('pointerdown', e => { isDown=true; lastX=e.clientX; lastY=e.clientY; canvas.setPointerCapture(e.pointerId); lastInteract=performance.now(); });
+  canvas.addEventListener('pointermove', e => {
+    if (!isDown) return;
+    const dx=e.clientX-lastX, dy=e.clientY-lastY;
+    phone.rotation.y+=dx*0.01; phone.rotation.x=Math.max(-1.1,Math.min(1.1,phone.rotation.x+dy*0.01));
+    velX=dx*0.01; velY=dy*0.01; lastX=e.clientX; lastY=e.clientY; lastInteract=performance.now();
+  });
+  const end=()=>{ isDown=false; };
+  canvas.addEventListener('pointerup',end); canvas.addEventListener('pointercancel',end); canvas.addEventListener('pointerleave',end);
+
+  (function loop() {
+    if (!isDown) {
+      phone.rotation.y+=velX; phone.rotation.x+=velY;
+      velX*=0.93; velY*=0.93;
+      if (Math.abs(velX)<0.0002) velX=0;
+      if (Math.abs(velY)<0.0002) velY=0;
+      if (performance.now()-lastInteract>2000) {
+        phone.rotation.y+=0.0035;
+        phone.rotation.x+=(0.15-phone.rotation.x)*0.02;
+      }
+    }
+    renderer.render(scene,camera);
+    requestAnimationFrame(loop);
+  })();
+}
+
+window.__initPhone3D = initPhone3D;
+
+(function poll() {
+  const c = document.getElementById('phone-canvas');
+  if (c) { initPhone3D(c); } else { setTimeout(poll, 80); }
+})();
+</script>
 </body>
 </html>
