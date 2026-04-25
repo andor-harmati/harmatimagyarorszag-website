@@ -42,6 +42,8 @@ function HeroScrub({
   const [framesOk, setFramesOk] = React.useState(true);
   const [aspect, setAspect]   = React.useState(defaultAspect);
   const reduced = usePrefersReducedMotion();
+  const frameUrlRef = React.useRef(frameUrl);
+  frameUrlRef.current = frameUrl;
 
   // ── Frame loading ──────────────────────────────────────────────
   React.useEffect(() => {
@@ -73,7 +75,7 @@ function HeroScrub({
       if (i < 4) img.fetchPriority = "high";
       img.onerror = onErr;
       if (i === 0) img.onload = () => onFirstReady(img);
-      img.src = frameUrl(i);
+      img.src = frameUrlRef.current(i);
       images[i] = img;
     };
 
@@ -93,7 +95,7 @@ function HeroScrub({
 
     const fallback = setTimeout(() => { if (!cancelled && !images[0]?.complete) setFramesOk(false); }, 4500);
     return () => { cancelled = true; if (timer) clearTimeout(timer); clearTimeout(fallback); };
-  }, [reduced, frameCount, frameUrl]);
+  }, [reduced, frameCount]);
 
   // ── Entry animation ────────────────────────────────────────────
   React.useEffect(() => {
