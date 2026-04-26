@@ -166,8 +166,9 @@
     .footer-bar { flex-direction: column; align-items: flex-start !important; gap: 12px !important; }
     .ai-section-orbs { display: none !important; }
     .principle { padding: 24px !important; }
-    .grid-3 > article { padding: 28px 4px !important; border-right: none !important; border-top: 1px solid #1f2e25 !important; }
+    .grid-3 > article { padding: 28px 4px !important; border-right: none !important; border-top: 1px solid #1f2e25 !important; transform: scale(0.84) !important; filter: blur(4px) !important; opacity: 0.55 !important; }
     .grid-3 > article:first-child { border-top: none !important; }
+    .grid-3 > article.is-inview { transform: scale(1) !important; filter: blur(0) !important; opacity: 1 !important; }
     .approach-quote { padding: 28px !important; }
     .ping-row { flex-wrap: wrap; }
     .ws-row { grid-template-columns: 1fr 1fr !important; grid-template-areas: 'slide slide' 'prev next' !important; gap: 14px !important; }

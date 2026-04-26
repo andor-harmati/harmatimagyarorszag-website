@@ -41,17 +41,33 @@ const services = [
 
 const ServiceCard = ({ service, idx }) => {
   const [hov, setHov] = React.useState(false);
+  const [inView, setInView] = React.useState(false);
+  const ref = React.useRef(null);
   const col = idx % 3;
   const row = Math.floor(idx / 3);
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setInView(true); return; }
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => setInView(e.intersectionRatio >= 0.85)),
+      { threshold: [0, 0.85, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <article
+      ref={ref}
+      className={inView ? 'is-inview' : ''}
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
         padding: 40,
         borderTop: row === 0 ? 'none' : '1px solid #1f2e25',
         borderRight: col < 2 ? '1px solid #1f2e25' : 'none',
-        transition: 'background 400ms ease, filter 420ms cubic-bezier(.2,.8,.2,1), transform 420ms cubic-bezier(.2,.8,.2,1)',
+        transition: 'background 400ms ease, filter 520ms cubic-bezier(.2,.8,.2,1), transform 520ms cubic-bezier(.2,.8,.2,1), opacity 520ms ease',
         background: hov ? 'rgba(255,255,255,0.025)' : 'transparent',
         filter: hov ? 'blur(0)' : 'blur(2px)',
         transform: hov ? 'scale(1.2)' : 'scale(1)',
