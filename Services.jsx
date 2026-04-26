@@ -3,14 +3,14 @@
 const services = [
   {
     num: '/01', title: 'Stratégia',
-    desc: 'Piackutatás, versenytárselemzés, célközönség-térkép és éves tartalmi irány. A stratégia nem dokumentum — iránytű, amit minden hét használ.',
+    desc: 'Piackutatás, versenytárselemzés, célközönség-térkép és éves tartalmi irány. A stratégia egy iránytű, amit minden héten használunk.',
     items: ['— Márka audit & pozicionálás', '— Tartalmi pillérek', '— KPI keretrendszer'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" strokeWidth="1"/><path d="M14 5v9l6 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
   },
   {
     num: '/02', title: 'Tartalomgyártás',
-    desc: 'Forgatás, vágás, fotó, grafika és szövegírás. Saját stúdió Budapesten, mobilis forgatócsoport az ország bármely pontján.',
-    items: ['— Rövidvideó (Reels, TikTok)', '— Statikus & carousel grafika', '— Szövegírás, copy'],
+    desc: 'Forgatás, vágás, fotó, grafika és szövegírás. Mobilis forgatócsoport bárhol Pest megyében.',
+    items: ['— Rövid videó (Reels, TikTok)', '— Statikus & carousel grafika', '— Szövegírás, copy'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="14" rx="1.5" stroke="currentColor" strokeWidth="1"/><path d="M4 10h20M9 14h6" stroke="currentColor" strokeWidth="1"/></svg>,
   },
   {
@@ -21,7 +21,7 @@ const services = [
   },
   {
     num: '/04', title: 'Közösségépítés',
-    desc: 'Moderáció, DM-kezelés, közösségi válaszok magyarul, a márka hangján. Egy márkának emberi hang kell — nem botos válaszok.',
+    desc: 'Moderáció, DM-kezelés. Egy márkának emberi hang kell — nem botos válaszok.',
     items: ['— Válaszkezelés 24 órán belül', '— Krízis-protokoll', '— Közösségi események'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="11" r="4" stroke="currentColor" strokeWidth="1"/><circle cx="19" cy="15" r="3" stroke="currentColor" strokeWidth="1"/><path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/></svg>,
   },
@@ -33,7 +33,7 @@ const services = [
   },
   {
     num: '/06', title: 'Márkaépítés',
-    desc: 'Vizuális identitás, hangnem-könyv, tipográfiai rendszer. Nemcsak logó — konzisztens nyelv, ami minden csatornán felismerhető.',
+    desc: 'Vizuális identitás. Nem csak logó — konzisztens kommunikáció, ami minden csatornán felismerhető.',
     items: ['— Arculati kézikönyv', '— Közösségi sablonrendszer', '— Tone of voice dokumentum'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3 L17 11 L25 11 L19 16 L21 24 L14 19 L7 24 L9 16 L3 11 L11 11 Z" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/></svg>,
   },
