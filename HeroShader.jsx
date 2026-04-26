@@ -45,7 +45,7 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
         background: 'radial-gradient(120% 70% at 50% 50%, rgba(11,18,14,0) 0%, rgba(11,18,14,0.55) 70%, rgba(11,18,14,0.85) 100%)',
       }} />
 
-      <div style={{
+      <div className="hero-content-grid" style={{
         position: 'relative', zIndex: 2,
         maxWidth: 1280, width: '100%',
         display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'end',
@@ -83,7 +83,7 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
           </div>
         </div>
 
-        <div style={{
+        <div className="hero-stats-divider" style={{
           ...fadeIn(280),
           paddingLeft: 40, borderLeft: '1px solid #1f2e25', paddingTop: 24,
         }}>

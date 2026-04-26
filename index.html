@@ -98,6 +98,40 @@
     cursor: pointer; transition: border-color 300ms, color 300ms; user-select: none;
   }
   .chip:hover, .chip.active { border-color: #3a8c63; color: #3a8c63; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1024px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+    .principles { grid-template-columns: repeat(2, 1fr) !important; }
+    .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .split-1-2 { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .hero-content-grid { grid-template-columns: 1fr !important; }
+    .hero-stats-divider { padding-left: 0 !important; border-left: 0 !important; }
+  }
+  @media (max-width: 768px) {
+    .section-pad { padding-left: 20px !important; padding-right: 20px !important; padding-top: 80px !important; padding-bottom: 80px !important; }
+    #hero { padding: 100px 20px 80px !important; min-height: auto !important; }
+    .grid-3, .principles, .process-grid { grid-template-columns: 1fr !important; }
+    .split-1-1 { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .form-grid-2 { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .marquee-item { font-size: 20px !important; }
+    .marquee-track { gap: 32px !important; }
+    .marquee-group { gap: 32px !important; }
+    .hide-mobile { display: none !important; }
+    .show-mobile { display: inline-flex !important; }
+    .header-pad { padding: 12px 16px !important; }
+    .form-pad { padding: 24px !important; gap: 18px !important; }
+    .footer-pad { padding: 48px 20px 32px !important; }
+    .footer-cols { grid-template-columns: repeat(2, 1fr) !important; gap: 24px !important; }
+    .footer-bar { flex-direction: column; align-items: flex-start !important; gap: 12px !important; }
+    .ai-section-orbs { display: none !important; }
+    .principle { padding: 24px !important; }
+    .grid-3 > article { padding: 28px 4px !important; border-right: none !important; border-top: 1px solid #1f2e25 !important; }
+    .grid-3 > article:first-child { border-top: none !important; }
+    .approach-quote { padding: 28px !important; }
+    .ping-row { flex-wrap: wrap; }
+  }
+  .show-mobile { display: none; }
 </style>
 </head>
 <body>
@@ -133,13 +167,13 @@ const AISection = () => {
   ];
 
   return (
-    <section id="ai" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
-      <span style={{ position: 'absolute', width: 380, height: 380, top: 40, left: -120, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(58,140,99,0.28)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite' }} />
-      <span style={{ position: 'absolute', width: 260, height: 260, bottom: 40, right: -80, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(45,106,79,0.22)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite', animationDelay: '-7s' }} />
+    <section id="ai" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
+      <span className="ai-section-orbs" style={{ position: 'absolute', width: 380, height: 380, top: 40, left: -120, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(58,140,99,0.28)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite' }} />
+      <span className="ai-section-orbs" style={{ position: 'absolute', width: 260, height: 260, bottom: 40, right: -80, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(45,106,79,0.22)0%,transparent 70%)', filter: 'blur(60px)', pointerEvents: 'none', animation: 'floaty 14s ease-in-out infinite', animationDelay: '-7s' }} />
       <style>{`@keyframes floaty{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(180deg)}}`}</style>
 
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
+        <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
           <div>
             <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>03 — MI-vezérelt növekedés</div>
             <div style={{ marginTop: 24, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>2026. évi eszközpark</div>
@@ -150,7 +184,7 @@ const AISection = () => {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center' }}>
+        <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
             {features.map((f, i) => (
               <div key={i} style={{ display: 'flex', gap: 20 }}>
@@ -178,11 +212,11 @@ const AISection = () => {
 
 /* ── Approach Section ── */
 const ApproachSection = () => (
-  <section id="megkozelites" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
+  <section id="megkozelites" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63', marginBottom: 24 }}>05 — Megközelítés</div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, marginBottom: 80 }}>
+      <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, marginBottom: 80 }}>
         <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,5.2rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
           A figyelem nem kampány.<br />
           <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Naponta épül —</em><br />
@@ -219,9 +253,9 @@ const ApproachSection = () => (
 
 /* ── Process Section ── */
 const ProcessSection = () => (
-  <section id="folyamat" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
+  <section id="folyamat" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
+      <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
         <div>
           <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>04 — Munkafolyamat</div>
           <div style={{ marginTop: 24, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>Négy szakasz, egy ritmus</div>
@@ -262,10 +296,10 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="kapcsolat" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
+    <section id="kapcsolat" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: -80, left: '50%', transform: 'translateX(-50%)', width: '60rem', height: '60rem', borderRadius: '999px', pointerEvents: 'none', background: 'radial-gradient(circle,rgba(201,164,107,0.10)0%,rgba(201,164,107,0)55%)' }} />
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start' }}>
+        <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start' }}>
           <div>
             <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>06 — Kapcsolat</div>
             <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: '24px 0 0' }}>
@@ -313,8 +347,8 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <form style={{ background: 'linear-gradient(180deg,rgba(255,255,255,0.025),transparent 60%),#111a14', border: '1px solid #1f2e25', padding: 40, display: 'flex', flexDirection: 'column', gap: 24 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+          <form className="form-pad" style={{ background: 'linear-gradient(180deg,rgba(255,255,255,0.025),transparent 60%),#111a14', border: '1px solid #1f2e25', padding: 40, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
               <div className="field"><label>Név</label><input type="text" /></div>
               <div className="field"><label>Cégnév</label><input type="text" /></div>
             </div>

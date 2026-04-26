@@ -1,7 +1,7 @@
 // Footer.jsx — Harmati Magyarország
 
 const HarmatiFooter = () => (
-  <footer style={{ borderTop: '1px solid #1f2e25', padding: '64px 40px 40px', background: '#0b120e' }}>
+  <footer className="footer-pad" style={{ borderTop: '1px solid #1f2e25', padding: '64px 40px 40px', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 64, gap: 48, flexWrap: 'wrap' }}>
         {/* Left brand */}
@@ -28,7 +28,7 @@ const HarmatiFooter = () => (
         </div>
 
         {/* Right nav cols */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40 }}>
+        <div className="footer-cols" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 40 }}>
           {[
             { head: 'Cég', links: ['Megközelítés','Munkafolyamat','Kapcsolat'] },
             { head: 'Szolgáltatás', links: ['Stratégia','Tartalom','Hirdetés','Weboldal'] },
@@ -47,7 +47,7 @@ const HarmatiFooter = () => (
       </div>
 
       {/* Bottom bar */}
-      <div style={{
+      <div className="footer-bar" style={{
         paddingTop: 32, borderTop: '1px solid #1f2e25',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         fontFamily: "'Geist Mono', monospace", fontSize: 12, color: '#7a8a7e',

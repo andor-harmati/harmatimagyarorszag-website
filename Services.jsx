@@ -70,10 +70,10 @@ const ServiceCard = ({ service, idx }) => {
 };
 
 const HarmatiServices = () => (
-  <section id="szolgaltatasok" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
+  <section id="szolgaltatasok" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       {/* Section head */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
+      <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
         <div>
           <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>01 — Szolgáltatások</div>
           <div style={{ marginTop: 24, fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>Hat terület, egy rendszer</div>
@@ -88,7 +88,7 @@ const HarmatiServices = () => (
       </div>
 
       {/* Services grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+      <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
         {services.map((s, i) => <ServiceCard key={i} service={s} idx={i} />)}
       </div>
     </div>
