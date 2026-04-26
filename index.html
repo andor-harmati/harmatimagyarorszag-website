@@ -176,6 +176,14 @@
     .grid-3 > article { padding: 28px 4px !important; border-right: none !important; border-top: 1px solid #1f2e25 !important; transform: scale(0.84) !important; filter: blur(4px) !important; opacity: 0.55 !important; }
     .grid-3 > article:first-child { border-top: none !important; }
     .grid-3 > article.is-inview { transform: scale(1) !important; filter: blur(0) !important; opacity: 1 !important; }
+    .process-step.is-inview .dot {
+      background: #3a8c63;
+      box-shadow: 0 0 0 4px #0b120e, 0 0 0 5px #3a8c63, 0 0 18px rgba(58,140,99,0.6);
+    }
+    .process-step.is-inview .process-when {
+      color: #3a8c63 !important;
+      text-shadow: 0 0 18px rgba(58,140,99,0.55);
+    }
     .approach-quote { padding: 28px !important; }
     .ping-row { flex-wrap: wrap; }
     .ws-row { grid-template-columns: 1fr 1fr !important; grid-template-areas: 'slide slide' 'prev next' !important; gap: 14px !important; }
@@ -455,6 +463,29 @@ const ApproachSection = () => {
 };
 
 /* ── Process Section ── */
+const ProcessStep = ({ s }) => {
+  const [inView, setInView] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => setInView(e.intersectionRatio >= 0.85)),
+      { threshold: [0, 0.85, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className={`process-step${inView ? ' is-inview' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
+      <span className="dot" />
+      <div className="process-when" style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
+      <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 32, lineHeight: 1.05, color: '#f2ede2', margin: 0 }}>{s.title}</h3>
+      <p style={{ marginTop: 16, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{s.p}</p>
+    </div>
+  );
+};
+
 const ProcessSection = () => (
   <section id="folyamat" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
@@ -469,18 +500,11 @@ const ProcessSection = () => (
       </div>
       <div className="process-grid">
         {[
-          { when: '01',      title: 'Felfedezés',   active: true,  p: 'Beszélgetés a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás.' },
-          { when: '02',    title: 'Stratégiaépítés',    active: false, p: 'Pozicionálás, közönség, tartalmi pillérek és hirdetési keret.' },
-          { when: '03',   title: 'Kivitelezés',  active: false, p: 'Heti forgatás, napi közzététel és moderáció. Hirdetések futnak.' },
-          { when: '04', title: 'Optimalizáció', active: false, p: 'Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus.' },
-        ].map((s, i) => (
-          <div key={i} className={`process-step${s.active ? ' active' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
-            <span className="dot" />
-            <div className="process-when" style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: s.active ? '#3a8c63' : '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
-            <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 32, lineHeight: 1.05, color: '#f2ede2', margin: 0 }}>{s.title}</h3>
-            <p style={{ marginTop: 16, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{s.p}</p>
-          </div>
-        ))}
+          { when: '01', title: 'Felfedezés',     p: 'Beszélgetés a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás.' },
+          { when: '02', title: 'Stratégiaépítés', p: 'Pozicionálás, közönség, tartalmi pillérek és hirdetési keret.' },
+          { when: '03', title: 'Kivitelezés',    p: 'Heti forgatás, napi közzététel és moderáció. Hirdetések futnak.' },
+          { when: '04', title: 'Optimalizáció',  p: 'Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus.' },
+        ].map((s, i) => <ProcessStep key={i} s={s} />)}
       </div>
     </div>
   </section>
