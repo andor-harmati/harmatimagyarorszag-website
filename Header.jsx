@@ -16,8 +16,8 @@ const HarmatiHeader = ({ activeSection }) => {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  const navItems = ['Szolgáltatások','Weboldal','MI-növekedés','Megközelítés','Kapcsolat'];
-  const navHrefs = ['#szolgaltatasok','#weboldal','#ai','#megkozelites','#kapcsolat'];
+  const navItems = ['Szolgáltatások','Weboldal','MI-növekedés','Munkafolyamat','Megközelítés','Kapcsolat'];
+  const navHrefs = ['#szolgaltatasok','#weboldal','#ai','#folyamat','#megkozelites','#kapcsolat'];
 
   return (
     <header style={{

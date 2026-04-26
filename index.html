@@ -99,6 +99,20 @@
   }
   .chip:hover, .chip.active { border-color: #3a8c63; color: #3a8c63; }
 
+  /* Website slide carousel */
+  @keyframes wsSlideInRight { from { opacity: 0; transform: translateX(36px); filter: blur(6px); } to { opacity: 1; transform: translateX(0); filter: blur(0); } }
+  @keyframes wsSlideInLeft  { from { opacity: 0; transform: translateX(-36px); filter: blur(6px); } to { opacity: 1; transform: translateX(0); filter: blur(0); } }
+  .ws-slide-next { animation: wsSlideInRight 520ms cubic-bezier(.2,.8,.2,1) both; }
+  .ws-slide-prev { animation: wsSlideInLeft  520ms cubic-bezier(.2,.8,.2,1) both; }
+  .ws-arrow { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; border: 1px solid #2a3d30; background: rgba(11,18,14,0.6); color: #c8c5bd; cursor: pointer; transition: border-color 280ms, color 280ms, transform 280ms, background 280ms; }
+  .ws-arrow:hover { border-color: #3a8c63; color: #3a8c63; transform: translateY(-2px); background: rgba(11,18,14,0.85); }
+  .ws-arrow:active { transform: translateY(0); }
+  .ws-arrow:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+  .ws-dot { width: 26px; height: 4px; border-radius: 2px; background: #1f2e25; border: 0; padding: 0; cursor: pointer; transition: background 320ms, width 320ms; }
+  .ws-dot.active { background: #3a8c63; width: 44px; }
+  .ws-dot:hover { background: #2a3d30; }
+  .ws-dot.active:hover { background: #3a8c63; }
+
   /* ─── Responsive ─── */
   @media (max-width: 1024px) {
     .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
@@ -129,6 +143,10 @@
     .grid-3 > article:first-child { border-top: none !important; }
     .approach-quote { padding: 28px !important; }
     .ping-row { flex-wrap: wrap; }
+    .ws-row { grid-template-columns: 1fr 1fr !important; grid-template-areas: 'slide slide' 'prev next' !important; gap: 14px !important; }
+    .ws-row > .ws-arrow:nth-child(1) { grid-area: prev; justify-self: stretch; width: auto !important; }
+    .ws-row > div { grid-area: slide; }
+    .ws-row > .ws-arrow:nth-child(3) { grid-area: next; justify-self: stretch; width: auto !important; }
   }
   .show-mobile { display: none; }
 </style>
@@ -143,6 +161,128 @@
 
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
+
+/* ── Website Section (carousel) ── */
+const WebsiteSection = () => {
+  const slides = [
+    {
+      num: '01',
+      title: 'Egyedi tervezés',
+      desc: 'Minden weboldal a márkára szabva készül. Wireframe, dizájnrendszer, tipográfiai skála — sablonok és sablonszerű megoldások nélkül.',
+      bullets: ['— Brand-tudatos vizuális rendszer', '— Mobil-első wireframe', '— Komponens-könyvtár'],
+    },
+    {
+      num: '02',
+      title: 'Reszponzív fejlesztés',
+      desc: 'Modern keretrendszerek, tiszta kód, akadálymentes (WCAG) jelölés. Telefonon, tableten és asztalon ugyanolyan élmény.',
+      bullets: ['— React / Next.js front-end', '— Tailwind & szemantikus HTML', '— A11y-megfelelőség'],
+    },
+    {
+      num: '03',
+      title: 'Tartalom és SEO',
+      desc: 'Magyar nyelvű szövegezés, kulcsszó-kutatás, on-page SEO. Az oldal nem csak szép — a vásárlóid meg is találják.',
+      bullets: ['— Kulcsszó-térkép', '— Schema.org jelölés', '— OG / Twitter card meta'],
+    },
+    {
+      num: '04',
+      title: 'Sebességoptimalizálás',
+      desc: 'Core Web Vitals, képoptimalizálás, edge cache. A gyors oldalon több vásárló marad, és magasabb a keresőhelyezés is.',
+      bullets: ['— LCP cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban', '— CDN + edge cache'],
+    },
+    {
+      num: '05',
+      title: 'Folyamatos fejlesztés',
+      desc: 'Az indulás csak a kezdet. Havi karbantartás, biztonsági frissítések, A/B tesztek, folyamatos finomhangolás.',
+      bullets: ['— Havi audit & jelentés', '— Biztonsági frissítések', '— A/B tesztelés és iteráció'],
+    },
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState(1);
+
+  const go = (delta) => {
+    setDir(delta);
+    setIndex((i) => (i + delta + slides.length) % slides.length);
+  };
+  const jumpTo = (target) => {
+    if (target === index) return;
+    setDir(target > index ? 1 : -1);
+    setIndex(target);
+  };
+
+  const slide = slides[index];
+
+  return (
+    <section id="weboldal" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e', position: 'relative', overflow: 'hidden' }}>
+      <span className="ai-section-orbs" style={{ position: 'absolute', width: 420, height: 420, top: 60, right: -140, borderRadius: '9999px', background: 'radial-gradient(circle,rgba(58,140,99,0.18)0%,transparent 70%)', filter: 'blur(70px)', pointerEvents: 'none' }} />
+
+      <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
+        {/* Section head */}
+        <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 56 }}>
+          <div>
+            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Weboldal</div>
+            <div style={{ marginTop: 18, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>{String(index + 1).padStart(2,'0')} / {String(slides.length).padStart(2,'0')}</div>
+          </div>
+          <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4.4vw,3.6rem)', lineHeight: 1.05, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
+            Weboldalfejlesztés —{' '}
+            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>az alapoktól a finomhangolásig.</em>
+          </h2>
+        </div>
+
+        {/* Carousel: arrows + slide */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 20, alignItems: 'stretch' }} className="ws-row">
+          <button className="ws-arrow" aria-label="Előző" onClick={() => go(-1)} style={{ alignSelf: 'center' }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 3L5 9l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+
+          <div style={{
+            position: 'relative',
+            border: '1px solid #1f2e25',
+            borderRadius: 18,
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 60%), rgba(11,18,14,0.55)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 30px 80px rgba(0,0,0,0.45)',
+            padding: 'clamp(28px, 4.5vw, 56px)',
+            minHeight: 360,
+            overflow: 'hidden',
+          }}>
+            {/* Subtle grid lines on the side */}
+            <div aria-hidden="true" style={{ position: 'absolute', top: 0, bottom: 0, right: 0, width: 1, background: 'linear-gradient(180deg, transparent, #1f2e25 40%, #1f2e25 60%, transparent)' }} />
+
+            <div key={index} className={dir >= 0 ? 'ws-slide-next' : 'ws-slide-prev'}>
+              <div style={{ fontFamily: "'Instrument Serif',serif", fontStyle: 'italic', fontSize: 'clamp(3.2rem, 7vw, 5.6rem)', lineHeight: 0.95, color: '#3a8c63', letterSpacing: '-0.04em', marginBottom: 8 }}>
+                {slide.num}
+              </div>
+              <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(1.8rem, 3.4vw, 2.6rem)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#f2ede2', margin: '12px 0 18px' }}>
+                {slide.title}
+              </h3>
+              <p style={{ color: '#c8c5bd', fontSize: 15, lineHeight: 1.75, maxWidth: 620, margin: 0 }}>
+                {slide.desc}
+              </p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '32px 0 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {slide.bullets.map((b, i) => (
+                  <li key={i} style={{ fontFamily: "'Geist Mono',monospace", color: '#7a8a7e', fontSize: 13, letterSpacing: '0.02em' }}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <button className="ws-arrow" aria-label="Következő" onClick={() => go(1)} style={{ alignSelf: 'center' }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 3l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </button>
+        </div>
+
+        {/* Indicator dots */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 32 }}>
+          {slides.map((_, i) => (
+            <button key={i} className={`ws-dot${i === index ? ' active' : ''}`} aria-label={`Slide ${i + 1}`} onClick={() => jumpTo(i)} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 /* ── AI Section ── */
 const AISection = () => {
@@ -231,12 +371,12 @@ const ApproachSection = () => (
 
       <div className="principles">
         {[
-          { r: 'I.',   h: 'Átlátható beszámolók',    p: 'A nyers adat a tiéd. Minden kampány, minden hirdetési forint nyomon követhető.' },
-          { r: 'II.',  h: 'Magyar piac, magyar nyelv', p: 'A stratégia és a szöveg Magyarországon készül. Kulturális kontextus nélkül nincs jó kommunikáció.' },
-          { r: 'III.', h: 'Havi ritmus, nem sprint',  p: 'Minimum négy hónapos együttműködésben dolgozunk. Rövidebb idő alatt nem mérhető, mi számít.' },
-          { r: 'IV.',  h: 'Egy kapcsolattartó',       p: 'Egy dedikált stratéga kíséri végig a projektet. Nincsenek átadások, nincsenek elveszett e-mailek.' },
-          { r: 'V.',   h: 'Mély figyelem', p: 'Inkább mondunk nemet, mint hogy felületesek legyünk.' },
-          { r: 'VI.',  h: 'Tulajdonosi hozzáférés',   p: 'Minden fiók, domain és adat a tiéd marad. Ha egyszer külön utakra térünk, semmit nem kell visszakérned.' },
+          { r: 'i.',   h: 'Átlátható beszámolók',    p: 'A nyers adat a tiéd. Minden kampány, minden hirdetési forint nyomon követhető.' },
+          { r: 'ii.',  h: 'Magyar piac, magyar nyelv', p: 'A stratégia és a szöveg Magyarországon készül. Kulturális kontextus nélkül nincs jó kommunikáció.' },
+          { r: 'iii.', h: 'Havi ritmus, nem sprint',  p: 'Minimum négy hónapos együttműködésben dolgozunk. Rövidebb idő alatt nem mérhető, mi számít.' },
+          { r: 'iv.',  h: 'Egy kapcsolattartó',       p: 'Egy dedikált stratéga kíséri végig a projektet. Nincsenek átadások, nincsenek elveszett e-mailek.' },
+          { r: 'v.',   h: 'Kis portfólió, mély figyelem', p: 'Egyszerre legfeljebb nyolc aktív márkát kísérünk. Inkább mondunk nemet, mint hogy felületesek legyünk.' },
+          { r: 'vi.',  h: 'Tulajdonosi hozzáférés',   p: 'Minden fiók, domain és adat a tiéd marad. Ha egyszer külön utakra térünk, semmit nem kell visszakérned.' },
         ].map((p, i) => (
           <div key={i} className="principle">
             <div style={{ fontFamily: "'Instrument Serif',serif", fontSize: 44, lineHeight: 1, color: '#3a8c63' }}>{p.r}</div>
@@ -255,11 +395,12 @@ const ProcessSection = () => (
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
         <div>
-          <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Munkafolyamat</div>
+          <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>04 — Munkafolyamat</div>
+          <div style={{ marginTop: 24, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>Négy szakasz, egy ritmus</div>
         </div>
         <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
-          Minden együttműködés{' '}
-          <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>személyre szabott.</em>
+          Minden együttműködés ugyanígy indul —{' '}
+          <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>de sosem ugyanott végződik.</em>
         </h2>
       </div>
       <div className="process-grid">
@@ -415,6 +556,7 @@ const App = () => {
       <HarmatiHeader />
       <main>
         <HarmatiHeroShader onCTAClick={scrollToContact} />
+        <WebsiteSection />
         <Marquee />
         <HarmatiServices />
         <AISection />
