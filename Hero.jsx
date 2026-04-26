@@ -88,6 +88,10 @@ const HarmatiHero = ({ onCTAClick }) => {
         </div>
       </div>
 
+    </section>
+  );
+};
+
 const PingDot = () => (
   <span style={{ position: 'relative', width: 10, height: 10, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
     <style>{`@keyframes ping{0%{transform:scale(1);opacity:.75}80%,100%{transform:scale(2.2);opacity:0}}`}</style>

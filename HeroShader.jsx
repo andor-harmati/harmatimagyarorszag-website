@@ -103,15 +103,6 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
         </div>
       </div>
 
-      <div style={{
-        position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        fontFamily: "'Geist Mono', monospace", fontSize: 11, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: '#7a8a7e', zIndex: 2,
-      }}>
-        <span>görgess</span>
-        <span style={{ display: 'block', width: 1, height: 40, background: '#2a3d30' }} />
-      </div>
     </section>
   );
 };
