@@ -391,7 +391,7 @@ const ApproachSection = () => {
 
   // Auto-advance every 10s, looping last → first
   useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % n), 10000);
+    const id = setInterval(() => setActive((i) => (i + 1) % n), 4000);
     return () => clearInterval(id);
   }, [n]);
 
