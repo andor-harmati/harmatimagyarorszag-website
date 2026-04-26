@@ -266,10 +266,10 @@ const ProcessSection = () => (
       </div>
       <div className="process-grid">
         {[
-          { when: '01 — Hét 1',      title: 'Felfedezés',   active: true,  p: 'Mélyinterjú a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás.' },
-          { when: '02 — Hét 2–3',    title: 'Stratégia',    active: false, p: 'Pozicionálás, közönség, tartalmi pillérek, csatorna-súlyozás és hirdetési keret. Írásos dokumentum.' },
-          { when: '03 — Hónap 2+',   title: 'Kivitelezés',  active: false, p: 'Havi tartalmi naptár, heti forgatás, napi közzététel és moderáció. Hirdetések futnak, kreatívok tesztelődnek.' },
-          { when: '04 — Negyedévenként', title: 'Optimalizáció', active: false, p: 'Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus.' },
+          { when: '01',      title: 'Felfedezés',   active: true,  p: 'beszélgetés a tulajdonossal és a csapattal. Hozzáférés minden platformhoz, audit, versenytárskutatás.' },
+          { when: '02',    title: 'Stratégiaépítés',    active: false, p: 'Pozicionálás, közönség, tartalmi pillérek és hirdetési keret.' },
+          { when: '03',   title: 'Kivitelezés',  active: false, p: 'Heti forgatás, napi közzététel és moderáció. Hirdetések futnak.' },
+          { when: '04', title: 'Optimalizáció', active: false, p: 'Retrospektív: mi működött, mi nem, és miért. A stratégia korrekciója nem csúszás — beépített ritmus.' },
         ].map((s, i) => (
           <div key={i} className={`process-step${s.active ? ' active' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
             <span className="dot" />
