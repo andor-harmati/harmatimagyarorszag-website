@@ -88,20 +88,6 @@ const HarmatiHero = ({ onCTAClick }) => {
         </div>
       </div>
 
-      {/* Scroll cue */}
-      <div style={{
-        position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        fontFamily: "'Geist Mono', monospace", fontSize: 11, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: '#7a8a7e',
-      }}>
-        <span>görgess</span>
-        <span style={{ display: 'block', width: 1, height: 40, background: '#2a3d30' }} />
-      </div>
-    </section>
-  );
-};
-
 const PingDot = () => (
   <span style={{ position: 'relative', width: 10, height: 10, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
     <style>{`@keyframes ping{0%{transform:scale(1);opacity:.75}80%,100%{transform:scale(2.2);opacity:0}}`}</style>
