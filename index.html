@@ -223,9 +223,9 @@ const ApproachSection = () => (
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
           {[
-            'A közösségi média <strong>nem reklámcsatorna</strong>, hanem a márkád mindennapi viselkedése a nyilvánosság előtt. Hogyan szólal meg, mire reagál, mit ismer el, és mikor marad csendben — ezek a kérdések minden nap újra eldőlnek.',
-            'A Harmati Magyarország feladata, hogy ez a viselkedés <strong>következetes, hiteles és mérhető</strong> maradjon. Nincsenek csodareceptek, és nincs olyan "titkos fogás", amit egy jó agenciától meg lehetne venni.',
-            'Nem vállalunk egyszerre nyolcnál több aktív márkát. Nem dolgozunk automatizált MI-posztokkal. És nem vesszük fel azt a projektet, amelyben mi magunk sem hiszünk.',
+            'A közösségi média <strong>nem reklámcsatorna</strong>, hanem a márkád viselkedése a nyilvánosság előtt. Hogyan szólal meg, mire reagál és mikor marad csendben.',
+            'A HarmatiMagyarország feladata, hogy ez a viselkedés <strong>következetes, hiteles és mérhető</strong> maradjon.',
+            'Minden céggel a személyes igényeihez mérve foglalkozunk és nem veszünk fel olyan projektet, amelyben mi magunk sem hiszünk.',
           ].map((t, i) => <p key={i} style={{ color: '#c8c5bd', fontSize: 15, lineHeight: 1.8, margin: 0 }} dangerouslySetInnerHTML={{ __html: t.replace(/<strong>/g, '<strong style="color:#f2ede2;font-weight:500">') }} />)}
         </div>
       </div>
