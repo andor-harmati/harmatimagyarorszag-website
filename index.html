@@ -209,34 +209,24 @@ const { useState, useEffect, useRef } = React;
 const WebsiteSection = () => {
   const slides = [
     {
-      num: '01',
-      title: 'Egyedi tervezés',
-      desc: 'Minden weboldal a márkára szabva készül. Wireframe, dizájnrendszer, tipográfiai skála — sablonok és sablonszerű megoldások nélkül.',
-      bullets: ['— Brand-tudatos vizuális rendszer', '— Mobil-első wireframe', '— Komponens-könyvtár'],
+      num: 'Egyedi tervezés',
+      desc: 'Minden weboldal a márkára szabva készül. Designrendszer, tipográfiai skála. Sablonok nélkül.',
+      bullets: ['— Brand-tudatos vizuális rendszer', '— Komponens-könyvtár'],
     },
     {
-      num: '02',
-      title: 'Reszponzív fejlesztés',
-      desc: 'Modern keretrendszerek, tiszta kód, akadálymentes (WCAG) jelölés. Telefonon, tableten és asztalon ugyanolyan élmény.',
-      bullets: ['— React / Next.js front-end', '— Tailwind & szemantikus HTML', '— A11y-megfelelőség'],
+      num: 'Prémium megjelenés',
+      desc: 'Telefonon, tableten és asztalon is lenyúgöző élmény.',
+      bullets: ['— React / Next.js front-end', '— A11y-megfelelőség'],
     },
     {
-      num: '03',
-      title: 'Tartalom és SEO',
+      num: 'Tartalom és SEO',
       desc: 'Magyar nyelvű szövegezés, kulcsszó-kutatás, on-page SEO. Az oldal nem csak szép — a vásárlóid meg is találják.',
-      bullets: ['— Kulcsszó-térkép', '— Schema.org jelölés', '— OG / Twitter card meta'],
+      bullets: ['— SEO:keresőoptimalizálás', '— Schema.org jelölés'],
     },
     {
-      num: '04',
-      title: 'Sebességoptimalizálás',
+      num: 'Sebességoptimalizálás',
       desc: 'Core Web Vitals, képoptimalizálás, edge cache. A gyors oldalon több vásárló marad, és magasabb a keresőhelyezés is.',
-      bullets: ['— LCP cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban', '— CDN + edge cache'],
-    },
-    {
-      num: '05',
-      title: 'Folyamatos fejlesztés',
-      desc: 'Az indulás csak a kezdet. Havi karbantartás, biztonsági frissítések, A/B tesztek, folyamatos finomhangolás.',
-      bullets: ['— Havi audit & jelentés', '— Biztonsági frissítések', '— A/B tesztelés és iteráció'],
+      bullets: ['— LCP(legnagyobb vizuális tartalom) cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban',],
     },
   ];
 
