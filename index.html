@@ -390,11 +390,12 @@ const ApproachSection = () => {
   const [active, setActive] = useState(0);
   const n = principles.length;
 
-  // Auto-advance every 10s, looping last → first
+  // Auto-advance every 4s, looping last → first.
+  // Depending on `active` resets the timer whenever the user clicks a side peek.
   useEffect(() => {
-    const id = setInterval(() => setActive((i) => (i + 1) % n), 4000);
-    return () => clearInterval(id);
-  }, [n]);
+    const id = setTimeout(() => setActive((i) => (i + 1) % n), 4000);
+    return () => clearTimeout(id);
+  }, [active, n]);
 
   // Modular-distance class so the wrap-around slides forward smoothly
   const cardClass = (i) => {
