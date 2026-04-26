@@ -85,9 +85,15 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
 
         <div className="hero-stats-divider" style={{
           ...fadeIn(280),
-          paddingLeft: 40, borderLeft: '1px solid #1f2e25', paddingTop: 24,
+          padding: 28,
+          border: '1px solid #1f2e25',
+          borderRadius: 16,
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 60%), rgba(11,18,14,0.55)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 60px rgba(0,0,0,0.45)',
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, borderTop: '1px solid #1f2e25', paddingTop: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
             {[
               { num: '6', lbl: 'kiemelt platform' },
               { num: '100%', lbl: 'magyar csapat' },
