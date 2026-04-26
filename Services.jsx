@@ -51,8 +51,14 @@ const ServiceCard = ({ service, idx }) => {
         padding: 40,
         borderTop: row === 0 ? 'none' : '1px solid #1f2e25',
         borderRight: col < 2 ? '1px solid #1f2e25' : 'none',
-        transition: 'background 400ms',
-        background: hov ? 'rgba(255,255,255,0.015)' : 'transparent',
+        transition: 'background 400ms ease, filter 420ms cubic-bezier(.2,.8,.2,1), transform 420ms cubic-bezier(.2,.8,.2,1)',
+        background: hov ? 'rgba(255,255,255,0.025)' : 'transparent',
+        filter: hov ? 'blur(0)' : 'blur(2px)',
+        transform: hov ? 'scale(1.2)' : 'scale(1)',
+        transformOrigin: '50% 50%',
+        position: 'relative',
+        zIndex: hov ? 5 : 1,
+        willChange: 'transform, filter',
       }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 56 }}>
         <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.18em', color: '#3a8c63' }}>{service.num}</span>
