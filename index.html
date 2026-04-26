@@ -65,10 +65,17 @@
     position: absolute; top: 0; left: 0;
     width: 12px; height: 12px; border-radius: 999px;
     background: #f2ede2; box-shadow: 0 0 0 4px #0b120e, 0 0 0 5px #1f2e25;
+    transition: background 320ms ease, box-shadow 320ms ease;
   }
-  .process-step.active .dot {
+  .process-step.active .dot,
+  .process-step:hover .dot {
     background: #3a8c63;
     box-shadow: 0 0 0 4px #0b120e, 0 0 0 5px #3a8c63, 0 0 18px rgba(58,140,99,0.6);
+  }
+  .process-when { transition: color 320ms ease, text-shadow 320ms ease; }
+  .process-step:hover .process-when {
+    color: #3a8c63 !important;
+    text-shadow: 0 0 18px rgba(58,140,99,0.55);
   }
 
   /* Principles grid */
@@ -194,24 +201,34 @@ const { useState, useEffect, useRef } = React;
 const WebsiteSection = () => {
   const slides = [
     {
-      num: 'Egyedi tervezés',
-      desc: 'Minden weboldal a márkára szabva készül. Designrendszer, tipográfiai skála. sablonok nélkül.',
-      bullets: ['— Brandinghez kötött vizuális rendszer', '— Komponens-könyvtár'],
+      num: '01',
+      title: 'Egyedi tervezés',
+      desc: 'Minden weboldal a márkára szabva készül. Wireframe, dizájnrendszer, tipográfiai skála — sablonok és sablonszerű megoldások nélkül.',
+      bullets: ['— Brand-tudatos vizuális rendszer', '— Mobil-első wireframe', '— Komponens-könyvtár'],
     },
     {
-      num: 'Prémium megjelenés',
-      desc: 'Telefonon, tableten és asztalon is lenyűgöző élmény.',
-      bullets: ['— Interaktív elemek','- AI funkciók'],
+      num: '02',
+      title: 'Reszponzív fejlesztés',
+      desc: 'Modern keretrendszerek, tiszta kód, akadálymentes (WCAG) jelölés. Telefonon, tableten és asztalon ugyanolyan élmény.',
+      bullets: ['— React / Next.js front-end', '— Tailwind & szemantikus HTML', '— A11y-megfelelőség'],
     },
     {
-      num: 'Tartalom és SEO',
-      desc: 'Magyar nyelvű szövegezés, kulcsszó kiemelés, on-page SEO. Az oldal nem csak szép. A vásárlóid meg is találják.',
-      bullets: ['— SEO:keresőoptimalizálás', '— Schema.org jelölés'],
+      num: '03',
+      title: 'Tartalom és SEO',
+      desc: 'Magyar nyelvű szövegezés, kulcsszó-kutatás, on-page SEO. Az oldal nem csak szép — a vásárlóid meg is találják.',
+      bullets: ['— Kulcsszó-térkép', '— Schema.org jelölés', '— OG / Twitter card meta'],
     },
     {
-      num: 'Sebesség',
+      num: '04',
+      title: 'Sebességoptimalizálás',
       desc: 'Core Web Vitals, képoptimalizálás, edge cache. A gyors oldalon több vásárló marad, és magasabb a keresőhelyezés is.',
-      bullets: ['— LCP(legnagyobb látható tartalom) cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban'],
+      bullets: ['— LCP cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban', '— CDN + edge cache'],
+    },
+    {
+      num: '05',
+      title: 'Folyamatos fejlesztés',
+      desc: 'Az indulás csak a kezdet. Havi karbantartás, biztonsági frissítések, A/B tesztek, folyamatos finomhangolás.',
+      bullets: ['— Havi audit & jelentés', '— Biztonsági frissítések', '— A/B tesztelés és iteráció'],
     },
   ];
 
@@ -242,8 +259,8 @@ const WebsiteSection = () => {
             <div style={{ marginTop: 18, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>{String(index + 1).padStart(2,'0')} / {String(slides.length).padStart(2,'0')}</div>
           </div>
           <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4.4vw,3.6rem)', lineHeight: 1.05, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
-            Weboldalfejlesztés,{' '}
-            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>professzionálisan.</em>
+            Weboldalfejlesztés —{' '}
+            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>az alapoktól a finomhangolásig.</em>
           </h2>
         </div>
 
@@ -459,7 +476,7 @@ const ProcessSection = () => (
         ].map((s, i) => (
           <div key={i} className={`process-step${s.active ? ' active' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
             <span className="dot" />
-            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: s.active ? '#3a8c63' : '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
+            <div className="process-when" style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: s.active ? '#3a8c63' : '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
             <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 32, lineHeight: 1.05, color: '#f2ede2', margin: 0 }}>{s.title}</h3>
             <p style={{ marginTop: 16, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{s.p}</p>
           </div>
@@ -486,11 +503,11 @@ const ContactSection = () => {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
         <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start' }}>
           <div>
-            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Kapcsolat</div>
+            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>06 — Kapcsolat</div>
             <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: '24px 0 0' }}>
-              {' '}
-              <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Írj</em>{' '}
-             nekünk!
+              Írj nekünk.{' '}
+              <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Egy héten belül</em>{' '}
+              leülünk beszélgetni.
             </h2>
             <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 18 }}>
               {[
@@ -504,7 +521,7 @@ const ContactSection = () => {
                 }}>
                   <span style={{ color: '#3a8c63' }}>{item.icon}</span>
                   <span>{item.val}</span>
-                  <span style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e' }}> másolás</span>
+                  <span style={{ fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e' }}>— másolás</span>
                 </button>
               ))}
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, paddingTop: 4 }}>
