@@ -75,7 +75,7 @@ const HarmatiServices = () => (
       {/* Section head */}
       <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
         <div>
-          <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>01 — Szolgáltatások</div>
+          <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Szolgáltatások</div>
           <div style={{ marginTop: 24, fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>Hat terület, egy rendszer</div>
         </div>
         <div>
