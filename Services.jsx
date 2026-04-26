@@ -21,13 +21,13 @@ const services = [
   },
   {
     num: '/04', title: 'Közösségépítés',
-    desc: 'Moderáció, DM-kezelés. Egy márkának emberi hang kell — nem botos válaszok.',
-    items: ['— Válaszkezelés 24 órán belül', '— Krízis-protokoll', '— Közösségi események'],
+    desc: 'Moderáció, DM-kezelés.',
+    items: ['— Válaszkezelés 24 órán belül', '— Krízis-protokoll'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="11" r="4" stroke="currentColor" strokeWidth="1"/><circle cx="19" cy="15" r="3" stroke="currentColor" strokeWidth="1"/><path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/></svg>,
   },
   {
     num: '/05', title: 'Analitika',
-    desc: 'Heti dashboard, havi beszámolók és negyedéves retrospektív. Számok, kontextussal — nem képernyőfotók egy prezentációban.',
+    desc: 'Heti dashboard, havi beszámolók és negyedéves retrospektív.',
     items: ['— Looker Studio dashboard', '— GA4 & platform-analitika', '— Hozzáférés a nyers adathoz'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 22V10M12 22V4M19 22V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
   },
