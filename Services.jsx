@@ -80,9 +80,9 @@ const HarmatiServices = () => (
         </div>
         <div>
           <h2 style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
-            Nem kampányokat szállítunk.{' '}
-            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Rendszert építünk,</em>{' '}
-            amely hónapokon át dolgozik a márkádért.
+            Levesszük a{' '}
+            <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>közösségi média</em>{' '}
+            terhét a válladról
           </h2>
         </div>
       </div>
