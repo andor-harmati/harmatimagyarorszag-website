@@ -73,7 +73,7 @@ const HarmatiHeader = ({ activeSection }) => {
           }}
           onMouseEnter={e => { e.currentTarget.style.borderColor = '#3a8c63'; e.currentTarget.style.color = '#3a8c63'; }}
           onMouseLeave={e => { e.currentTarget.style.borderColor = '#2a3d30'; e.currentTarget.style.color = '#f2ede2'; }}>
-            Árajánlat
+            Lépj kapcsolatba
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8m0 0L6.5 2.5M10 6l-3.5 3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
           </a>
         </div>
