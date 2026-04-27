@@ -58,16 +58,6 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
           A közösségi média{' '}
           <em style={{ fontStyle: 'italic', color: '#5db88a', letterSpacing: '-0.045em' }}>művészete</em>
         </h1>
-
-        <div style={{ ...fadeIn(300), marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-          <LiquidButton primary onClick={onCTAClick}>
-            Indítsuk el a projektet
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
-          </LiquidButton>
-          <a href="#szolgaltatasok" style={{ textDecoration: 'none' }}>
-            <LiquidButton>Szolgáltatások</LiquidButton>
-          </a>
-        </div>
       </div>
 
     </section>
