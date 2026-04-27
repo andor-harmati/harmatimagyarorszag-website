@@ -51,24 +51,15 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
         display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'end',
       }}>
         <div>
-          <div style={{ ...fadeIn(0), display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
-            <PingDot />
-            <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#c8c5bd' }}>
-            </span>
-          </div>
-
           <h1 style={{
             ...fadeIn(80),
             fontFamily: "'Instrument Serif', serif", fontWeight: 400,
-            fontSize: 'clamp(2.4rem, 7vw, 6rem)', lineHeight: 1,
+            fontSize: 'clamp(3rem, 10vw, 8.5rem)', lineHeight: 1,
             letterSpacing: '-0.035em', color: '#f2ede2', margin: 0,
           }}>
             A közösségi média{' '}
             <em style={{ fontStyle: 'italic', color: '#5db88a', letterSpacing: '-0.045em' }}>művészete</em>
           </h1>
-
-          <p style={{ ...fadeIn(200), marginTop: 40, maxWidth: 560, color: '#c8c5bd', fontSize: 17, lineHeight: 1.7 }}>
-          </p>
 
           <div style={{ ...fadeIn(300), marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
             <LiquidButton primary onClick={onCTAClick}>
