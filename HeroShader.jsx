@@ -45,56 +45,28 @@ const HarmatiHeroShader = ({ onCTAClick }) => {
         background: 'radial-gradient(120% 70% at 50% 50%, rgba(11,18,14,0) 0%, rgba(11,18,14,0.55) 70%, rgba(11,18,14,0.85) 100%)',
       }} />
 
-      <div className="hero-content-grid" style={{
+      <div style={{
         position: 'relative', zIndex: 2,
         maxWidth: 1280, width: '100%',
-        display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'end',
       }}>
-        <div>
-          <h1 style={{
-            ...fadeIn(80),
-            fontFamily: "'Instrument Serif', serif", fontWeight: 400,
-            fontSize: 'clamp(3rem, 10vw, 8.5rem)', lineHeight: 1,
-            letterSpacing: '-0.035em', color: '#f2ede2', margin: 0,
-          }}>
-            A közösségi média{' '}
-            <em style={{ fontStyle: 'italic', color: '#5db88a', letterSpacing: '-0.045em' }}>művészete</em>
-          </h1>
-
-          <div style={{ ...fadeIn(300), marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-            <LiquidButton primary onClick={onCTAClick}>
-              Indítsuk el a projektet
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
-            </LiquidButton>
-            <a href="#szolgaltatasok" style={{ textDecoration: 'none' }}>
-              <LiquidButton>Szolgáltatások</LiquidButton>
-            </a>
-          </div>
-        </div>
-
-        <div className="hero-stats-divider" style={{
-          ...fadeIn(280),
-          padding: 28,
-          border: '1px solid #1f2e25',
-          borderRadius: 16,
-          background: 'linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0) 60%), rgba(11,18,14,0.55)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 20px 60px rgba(0,0,0,0.45)',
+        <h1 style={{
+          ...fadeIn(80),
+          fontFamily: "'Instrument Serif', serif", fontWeight: 400,
+          fontSize: 'clamp(3rem, 10vw, 8.5rem)', lineHeight: 1,
+          letterSpacing: '-0.035em', color: '#f2ede2', margin: 0,
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-            {[
-              { num: '6', lbl: 'kiemelt platform' },
-              { num: '100%', lbl: 'magyar csapat' },
-              { num: <span>7 <span style={{ color: '#3a8c63' }}>nap</span></span>, lbl: 'indulási idő' },
-              { num: <span>4 <span style={{ color: '#3a8c63' }}>hó</span></span>, lbl: 'minimum együttműk.' },
-            ].map((s, i) => (
-              <div key={i}>
-                <div style={{ fontFamily: "'Instrument Serif', serif", fontSize: 36, lineHeight: 1, color: '#f2ede2' }}>{s.num}</div>
-                <div style={{ marginTop: 6, fontFamily: "'Geist Mono', monospace", fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>{s.lbl}</div>
-              </div>
-            ))}
-          </div>
+          A közösségi média{' '}
+          <em style={{ fontStyle: 'italic', color: '#5db88a', letterSpacing: '-0.045em' }}>művészete</em>
+        </h1>
+
+        <div style={{ ...fadeIn(300), marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+          <LiquidButton primary onClick={onCTAClick}>
+            Indítsuk el a projektet
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
+          </LiquidButton>
+          <a href="#szolgaltatasok" style={{ textDecoration: 'none' }}>
+            <LiquidButton>Szolgáltatások</LiquidButton>
+          </a>
         </div>
       </div>
 
