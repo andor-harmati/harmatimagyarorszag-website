@@ -29,6 +29,15 @@ const HarmatiHero = ({ onCTAClick }) => {
         maxWidth: 1280, width: '100%',
         display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'end',
       }}>
+        {/* Left */}
+        <div>
+          {/* Avail badge */}
+          <div style={{ ...fadeIn(0), display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
+            <PingDot />
+            <span style={{ fontFamily: "'Geist Mono', monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#c8c5bd' }}>
+              Új projekteket fogadunk — 2026 Q2
+            </span>
+          </div>
 
           {/* Title */}
           <h1 style={{
@@ -40,6 +49,11 @@ const HarmatiHero = ({ onCTAClick }) => {
             A közösségi média{' '}
             <em style={{ fontStyle: 'italic', color: '#5db88a', letterSpacing: '-0.045em' }}>művészete</em>
           </h1>
+
+          {/* Subtitle */}
+          <p style={{ ...fadeIn(200), marginTop: 40, maxWidth: 560, color: '#c8c5bd', fontSize: 17, lineHeight: 1.7 }}>
+            A Harmati Magyarország egy független közösségi média műhely. Magyar márkáknak építünk stratégiát, tartalmat és hirdetési rendszert — mérhető eredményekre hangolva, feltűnés nélküli kézművességgel.
+          </p>
 
           {/* CTAs */}
           <div style={{ ...fadeIn(300), marginTop: 48, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>

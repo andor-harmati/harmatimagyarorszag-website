@@ -224,7 +224,7 @@ const WebsiteSection = () => {
       bullets: ['— SEO:keresőoptimalizálás', '— Schema.org jelölés'],
     },
     {
-      num: 'Optimalizálás',
+      num: 'Sebességoptimalizálás',
       desc: 'Core Web Vitals, képoptimalizálás, edge cache. A gyors oldalon több vásárló marad, és magasabb a keresőhelyezés is.',
       bullets: ['— LCP(legnagyobb vizuális tartalom) cél: 2.5 mp alatt', '— Képek WebP / AVIF formátumban',],
     },
@@ -503,12 +503,55 @@ const ProcessSection = () => (
 /* ── Contact Section ── */
 const ContactSection = () => {
   const [chips, setChips] = useState([]);
-  const toggleChip = (c) => setChips(prev => prev.includes(c) ? prev.filter(x => x !== c) : [...prev, c]);
+  const [form, setForm] = useState({ name: '', company: '', email: '', project: '' });
+  const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState('');
+
+  const toggleChip = (c) => setChips(prev => prev.includes(c) ? prev.filter(x => x !== c) : [...prev, c]);
   const copy = (text, label) => {
     navigator.clipboard?.writeText(text).catch(() => {});
     setToast(`${label} · ${text}`);
     setTimeout(() => setToast(''), 2200);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name || !form.email) {
+      setToast('Kérjük töltsd ki a szükséges mezőket');
+      setTimeout(() => setToast(''), 2200);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          company: form.company,
+          email: form.email,
+          services: chips,
+          project: form.project,
+        }),
+      });
+
+      if (response.ok) {
+        setToast('Köszönjük! Röviden válaszolunk.');
+        setForm({ name: '', company: '', email: '', project: '' });
+        setChips([]);
+        setTimeout(() => setToast(''), 2200);
+      } else {
+        setToast('Hiba történt. Próbáld később.');
+        setTimeout(() => setToast(''), 2200);
+      }
+    } catch (err) {
+      console.error(err);
+      setToast('Hiba történt. Próbáld később.');
+      setTimeout(() => setToast(''), 2200);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -555,25 +598,25 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <form className="form-pad" style={{ background: 'linear-gradient(180deg,rgba(255,255,255,0.025),transparent 60%),#111a14', border: '1px solid #1f2e25', padding: 40, display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <form onSubmit={handleSubmit} className="form-pad" style={{ background: 'linear-gradient(180deg,rgba(255,255,255,0.025),transparent 60%),#111a14', border: '1px solid #1f2e25', padding: 40, display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-              <div className="field"><label>Név</label><input type="text" /></div>
-              <div className="field"><label>Cégnév</label><input type="text" /></div>
+              <div className="field"><label>Név</label><input type="text" value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} disabled={loading} /></div>
+              <div className="field"><label>Cégnév</label><input type="text" value={form.company} onChange={(e) => setForm({...form, company: e.target.value})} disabled={loading} /></div>
             </div>
-            <div className="field"><label>Email</label><input type="email" /></div>
+            <div className="field"><label>Email</label><input type="email" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} disabled={loading} required /></div>
             <div className="field">
               <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#7a8a7e', marginBottom: 8 }}>Érdekelt szolgáltatás</div>
               <div className="chip-group">
                 {['Stratégia','Tartalom','Hirdetés','Közösség','Márkaépítés','Weboldal'].map(c => (
-                  <div key={c} className={`chip${chips.includes(c) ? ' active' : ''}`} onClick={() => toggleChip(c)}>{c}</div>
+                  <div key={c} className={`chip${chips.includes(c) ? ' active' : ''}`} onClick={() => !loading && toggleChip(c)} style={{ opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}>{c}</div>
                 ))}
               </div>
             </div>
-            <div className="field"><label>Röviden a projektről</label><textarea rows="4"></textarea></div>
+            <div className="field"><label>Röviden a projektről</label><textarea value={form.project} onChange={(e) => setForm({...form, project: e.target.value})} disabled={loading} rows="4"></textarea></div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, paddingTop: 8 }}>
               <p style={{ margin: 0, maxWidth: 260, fontSize: 11.5, color: '#7a8a7e', lineHeight: 1.55 }}>A beküldéssel elfogadod az adatvédelmi nyilatkozatot.</p>
-              <LiquidButton primary>
-                Küldés
+              <LiquidButton primary onClick={handleSubmit} style={{ opacity: loading ? 0.6 : 1 }}>
+                {loading ? 'Küldés...' : 'Küldés'}
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10m0 0L8 3m4 4l-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>
               </LiquidButton>
             </div>
@@ -638,11 +681,13 @@ const App = () => {
     </>
   );
 };
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 </script>
 
 <div id="root"></div>
+
+<script type="text/babel">
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
 
 <script type="module">
 import * as THREE from "three";
