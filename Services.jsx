@@ -3,8 +3,8 @@
 const services = [
   {
     title: 'Stratégia',
-    desc: 'Piackutatás, versenytárselemzés, célközönség-térkép és éves tartalmi irány. A stratégia egy iránytű, amit minden héten használunk.',
-    items: ['— Márka audit & pozicionálás', '— Tartalmi pillérek', '— KPI keretrendszer'],
+    desc: 'Felmérjük a piacot, versenytárselemzést, célközönségtérképet készítünk.',
+    items: ['— Tartalmi pillérekkel felépítjük a teljes marketingstratégiát.'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" strokeWidth="1"/><path d="M14 5v9l6 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>,
   },
   {
