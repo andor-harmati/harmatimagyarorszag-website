@@ -25,20 +25,14 @@ const services = [
     items: ['— Válaszkezelés 24 órán belül', '— Krízis-protokoll'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="11" r="4" stroke="currentColor" strokeWidth="1"/><circle cx="19" cy="15" r="3" stroke="currentColor" strokeWidth="1"/><path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/></svg>,
   },
-  {
-    title: 'Márkaépítés',
-    desc: 'Vizuális identitás. Nem csak logó — konzisztens kommunikáció, ami minden csatornán felismerhető.',
-    items: ['— Arculati kézikönyv', '— Közösségi sablonrendszer', '— Tone of voice dokumentum'],
-    icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 3 L17 11 L25 11 L19 16 L21 24 L14 19 L7 24 L9 16 L3 11 L11 11 Z" stroke="currentColor" strokeWidth="1" strokeLinejoin="round"/></svg>,
-  },
 ];
 
 const ServiceCard = ({ service, idx }) => {
   const [hov, setHov] = React.useState(false);
   const [inView, setInView] = React.useState(false);
   const ref = React.useRef(null);
-  const col = idx % 3;
-  const row = Math.floor(idx / 3);
+  const col = idx % 4;
+  const row = Math.floor(idx / 4);
 
   React.useEffect(() => {
     const el = ref.current;
@@ -58,9 +52,9 @@ const ServiceCard = ({ service, idx }) => {
       onMouseEnter={() => setHov(true)}
       onMouseLeave={() => setHov(false)}
       style={{
-        padding: 40,
+        padding: 32,
         borderTop: row === 0 ? 'none' : '1px solid #1f2e25',
-        borderRight: col < 2 ? '1px solid #1f2e25' : 'none',
+        borderRight: col < 3 ? '1px solid #1f2e25' : 'none',
         transition: 'background 400ms ease, filter 520ms cubic-bezier(.2,.8,.2,1), transform 520ms cubic-bezier(.2,.8,.2,1), opacity 520ms ease',
         background: hov ? 'rgba(255,255,255,0.025)' : 'transparent',
         filter: hov ? 'blur(0)' : 'blur(2px)',
@@ -99,7 +93,7 @@ const HarmatiServices = () => (
       </div>
 
       {/* Services grid */}
-      <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+      <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
         {services.map((s, i) => <ServiceCard key={i} service={s} idx={i} />)}
       </div>
     </div>

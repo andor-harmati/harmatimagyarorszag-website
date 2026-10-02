@@ -150,6 +150,9 @@
   /* ─── Responsive ─── */
   @media (max-width: 1024px) {
     .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid-3 > article { padding: 40px !important; }
+    .grid-3 > article:nth-child(n+3) { border-top: 1px solid #1f2e25 !important; }
+    .grid-3 > article:nth-child(2n) { border-right: none !important; }
     .principles { grid-template-columns: repeat(2, 1fr) !important; }
     .process-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .split-1-2 { grid-template-columns: 1fr !important; gap: 32px !important; }
