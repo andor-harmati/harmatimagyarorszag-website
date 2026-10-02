@@ -213,8 +213,9 @@ const WebsiteSection = () => {
   const slides = [
     {
       num: 'Egyedi tervezés',
-      desc: 'Minden weboldal a márkára szabva készül. Designrendszer, tipográfiai skála. Sablonok nélkül.',
-      bullets: ['— Brand-tudatos vizuális rendszer', '— Komponens-könyvtár'],
+      desc: 'Minden weboldal a márkára szabva készül. Designrendszer, tipográfiai skála.',
+      bullets: [],
+      large: true,
     },
     {
       num: 'Prémium megjelenés',
@@ -289,14 +290,14 @@ const WebsiteSection = () => {
               <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(1.8rem, 3.4vw, 2.6rem)', lineHeight: 1.05, letterSpacing: '-0.03em', color: '#f2ede2', margin: '12px 0 18px' }}>
                 {slide.title}
               </h3>
-              <p style={{ color: '#c8c5bd', fontSize: 15, lineHeight: 1.75, maxWidth: 620, margin: 0 }}>
+              <p style={{ color: '#c8c5bd', fontSize: slide.large ? 'clamp(18px, 2vw, 22px)' : 15, lineHeight: slide.large ? 1.6 : 1.75, maxWidth: slide.large ? 760 : 620, margin: 0 }}>
                 {slide.desc}
               </p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '32px 0 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {slide.bullets.length > 0 && <ul style={{ listStyle: 'none', padding: 0, margin: '32px 0 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {slide.bullets.map((b, i) => (
                   <li key={i} style={{ fontFamily: "'Geist Mono',monospace", color: '#7a8a7e', fontSize: 13, letterSpacing: '0.02em' }}>{b}</li>
                 ))}
-              </ul>
+              </ul>}
             </div>
           </div>
 
