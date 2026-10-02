@@ -32,7 +32,15 @@ module.exports = async (req, res) => {
   try {
     const upstream = await fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      // Forward the visitor's browser headers so the form backend's spam filter
+      // sees a normal site submission instead of a bare server request.
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': req.headers['user-agent'] || 'Mozilla/5.0',
+        Origin: req.headers.origin || 'https://www.harmatimagyarorszag.com',
+        Referer: req.headers.referer || 'https://www.harmatimagyarorszag.com/',
+      },
       body: JSON.stringify({
         _subject: `Új kapcsolatfelvétel: ${name}`,
         name,
