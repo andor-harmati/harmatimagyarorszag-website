@@ -15,7 +15,7 @@ const services = [
   },
   {
     title: 'Hirdetéskezelés',
-    desc: 'Meta, Google és TikTok hirdetési fiókok napi kezelése. Kreatív tesztelés, közönség-szegmentálás, ROAS-ra optimalizálva.',
+    desc: 'Meta, Google és TikTok hirdetési fiókok napi kezelése. Kreatív tesztelés, ROAS-ra optimalizálva.',
     items: ['— Meta Ads (Facebook, Instagram)', '— Google Ads & YouTube', '— TikTok Ads Manager'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 21 L10 13 L14 17 L22 7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="22" cy="7" r="2" fill="currentColor"/></svg>,
   },
