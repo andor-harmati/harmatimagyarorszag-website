@@ -21,7 +21,7 @@ const services = [
   },
   {
     title: 'Közösségépítés',
-    desc: 'Moderáció, DM-kezelés.',
+    desc: 'Automatizált DM-kezelés AI rendszerrel.',
     items: ['— Válaszkezelés 24 órán belül', '— Krízis-protokoll'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="10" cy="11" r="4" stroke="currentColor" strokeWidth="1"/><circle cx="19" cy="15" r="3" stroke="currentColor" strokeWidth="1"/><path d="M3 23 c1-4 5-6 7-6 m5 6 c0-3 2-5 5-5" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/></svg>,
   },
