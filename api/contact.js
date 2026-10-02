@@ -1,5 +1,5 @@
-// Vercel serverless function: forwards contact form submissions to Formspree,
-// which emails them to the address registered on the form.
+// Vercel serverless function: forwards contact form submissions to a form backend (Basin or Formspree),
+// which emails them to the address configured on the form.
 // Requires the FORMSPREE_ENDPOINT environment variable (set in the Vercel project settings).
 
 const clean = (v, max) => String(v ?? '').trim().slice(0, max);
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
     });
 
     if (!upstream.ok) {
-      console.error('Formspree responded', upstream.status, await upstream.text());
+      console.error('Form backend responded', upstream.status, await upstream.text());
       return res.status(502).json({ error: 'Failed to send' });
     }
     return res.status(200).json({ success: true });
