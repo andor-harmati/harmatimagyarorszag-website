@@ -95,9 +95,7 @@ const HarmatiServices = () => (
   <section id="szolgaltatasok" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       {/* Section head */}
-      <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
-        <div>
-        </div>
+      <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 24, marginBottom: 64 }}>
         <div>
           <h2 style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
             Levesszük a{' '}
