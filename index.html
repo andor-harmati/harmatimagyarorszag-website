@@ -253,8 +253,6 @@ const WebsiteSection = () => {
         {/* Section head */}
         <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 56 }}>
           <div>
-            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Weboldal</div>
-            <div style={{ marginTop: 18, fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7a8a7e' }}>{String(index + 1).padStart(2,'0')} / {String(slides.length).padStart(2,'0')}</div>
           </div>
           <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4.4vw,3.6rem)', lineHeight: 1.05, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
             Weboldalfejlesztés,{' '}
@@ -347,7 +345,6 @@ const AISection = () => {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
         <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
           <div>
-            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>AI vezérelt növekedés</div>
           </div>
           <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
             AI modellekkel {' '}
@@ -410,8 +407,6 @@ const ApproachSection = () => {
   return (
     <section id="megkozelites" className="section-pad" style={{ padding: '144px 40px', borderTop: '1px solid #1f2e25', background: '#0b120e' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63', marginBottom: 24 }}>Megközelítés</div>
-
         <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, marginBottom: 80 }}>
           <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4.6vw,4rem)', lineHeight: 1.05, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
             Az <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>eladhatóságra</em> építünk.<br />
@@ -437,8 +432,7 @@ const ApproachSection = () => {
               aria-hidden={Math.abs(i - active) > 1}
               tabIndex={i === active ? 0 : -1}
             >
-              <div style={{ fontFamily: "'Instrument Serif',serif", fontStyle: 'italic', fontSize: 'clamp(2.4rem, 5vw, 3.6rem)', lineHeight: 1, color: '#3a8c63', letterSpacing: '-0.04em' }}>{p.r}</div>
-              <h4 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', lineHeight: 1.15, color: '#f2ede2', margin: '18px 0 14px', letterSpacing: '-0.025em' }}>{p.h}</h4>
+              <h4 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(1.5rem, 2.8vw, 2rem)', lineHeight: 1.15, color: '#f2ede2', margin: '0 0 14px', letterSpacing: '-0.025em' }}>{p.h}</h4>
               <p style={{ margin: 0, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.75 }}>{p.p}</p>
             </div>
           ))}
@@ -466,7 +460,6 @@ const ProcessStep = ({ s }) => {
   return (
     <div ref={ref} className={`process-step${inView ? ' is-inview' : ''}`} style={{ position: 'relative', paddingTop: 56 }}>
       <span className="dot" />
-      <div className="process-when" style={{ fontFamily: "'Geist Mono',monospace", fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#c8c5bd', marginBottom: 12 }}>{s.when}</div>
       <h3 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 32, lineHeight: 1.05, color: '#f2ede2', margin: 0 }}>{s.title}</h3>
       <p style={{ marginTop: 16, color: '#c8c5bd', fontSize: 14.5, lineHeight: 1.7 }}>{s.p}</p>
     </div>
@@ -478,7 +471,6 @@ const ProcessSection = () => (
     <div style={{ maxWidth: 1280, margin: '0 auto' }}>
       <div className="split-1-2" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 24, marginBottom: 64 }}>
         <div>
-          <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Munkafolyamat</div>
         </div>
         <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2rem,4vw,3.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
           Minden együttműködés{' '}
@@ -557,8 +549,7 @@ const ContactSection = () => {
       <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative' }}>
         <div className="split-1-1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40, alignItems: 'start' }}>
           <div>
-            <div style={{ fontFamily: "'Geist Mono',monospace", fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#3a8c63' }}>Kapcsolat</div>
-            <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: '24px 0 0' }}>
+            <h2 style={{ fontFamily: "'Instrument Serif',serif", fontWeight: 400, fontSize: 'clamp(2.4rem,6vw,4.5rem)', lineHeight: 1, letterSpacing: '-0.035em', color: '#f2ede2', margin: 0 }}>
               {' '}
               <em style={{ fontStyle: 'italic', color: '#3a8c63', letterSpacing: '-0.045em' }}>Írj</em>{' '}
              nekünk!
