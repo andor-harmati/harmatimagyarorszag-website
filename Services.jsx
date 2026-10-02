@@ -10,7 +10,7 @@ const services = [
   {
     title: 'Tartalomgyártás',
     desc: 'Forgatás, vágás, fotó, grafika és szövegírás. Mobilis forgatócsoport bárhol Pest megyében.',
-    items: ['— Rövid videó (Reels, TikTok)', '— Statikus & carousel grafika', '— Szövegírás, copy'],
+    items: ['— Rövid videó (Reels, TikTok)', '— Statikus & carousel grafika'],
     icon: <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="6" width="20" height="14" rx="1.5" stroke="currentColor" strokeWidth="1"/><path d="M4 10h20M9 14h6" stroke="currentColor" strokeWidth="1"/></svg>,
   },
   {
